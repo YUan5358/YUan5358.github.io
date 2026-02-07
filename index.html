@@ -3,828 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>源額 - Minecraft内容创作者</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- 导入Minecraft字体 -->
+    <title>YUAN_E | Bio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        @font-face {
-            font-family: 'Minecraft';
-            src: url('https://fonts.cdnfonts.com/s/22286/Minecraft.woff') format('woff');
-        }
-        
-        @font-face {
-            font-family: 'MinecraftBold';
-            src: url('https://fonts.cdnfonts.com/s/22286/MinecraftBold.woff') format('woff');
-        }
-        
-        @font-face {
-            font-family: 'MinecraftItalic';
-            src: url('https://fonts.cdnfonts.com/s/22286/MinecraftItalic.woff') format('woff');
-        }
-    </style>
-    <style>
-        :root {
-            --gray-bg: #1a1a1a;
-            --gray-card: #2a2a2a;
-            --gray-light: #3a3a3a;
-            --text-primary: #f0f0f0;
-            --text-secondary: #b0b0b0;
-            --accent-pink: #ff6b9d;
-            --accent-red: #ff0000;
-            --accent-green: #4caf50;
-            --accent-blue: #2196f3;
-            --mc-green: #55ff55;
-            --mc-dark-green: #00aa00;
-            --mc-gray: #aaaaaa;
-        }
-        
-        * {
+        /* 全局基础 */
+        body, html {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            background-color: var(--gray-bg);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
-        }
-        
-        /* Minecraft字体类 */
-        .mc-font {
-            font-family: 'Minecraft', monospace;
-            letter-spacing: 1px;
-        }
-        
-        .mc-bold {
-            font-family: 'MinecraftBold', monospace;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-        
-        .mc-title {
-            font-family: 'MinecraftBold', monospace;
-            letter-spacing: 2px;
-            text-shadow: 3px 3px 0 #000000;
-        }
-        
-        .mc-button {
-            font-family: 'Minecraft', monospace;
-            letter-spacing: 1px;
-            image-rendering: pixelated;
-        }
-        
-        /* 平滑滚动容器 */
-        .scroll-container {
             height: 100vh;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
-            scroll-behavior: smooth;
-        }
-        
-        /* 页面区域 */
-        .section {
-            min-height: 100vh;
-            scroll-snap-align: start;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 20px;
-            overflow: hidden;
-        }
-        
-        /* 头部介绍区域 - Minecraft风格 */
-        .header-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #0c2461, #1e3799, #4a69bd);
-            z-index: -2;
-        }
-        
-        .minecraft-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(transparent 95%, rgba(0, 0, 0, 0.1) 96%),
-                linear-gradient(90deg, transparent 95%, rgba(0, 0, 0, 0.1) 96%);
-            background-size: 20px 20px;
-            z-index: -1;
-            opacity: 0.3;
-        }
-        
-        .header-particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.3;
-        }
-        
-        .particle {
-            position: absolute;
-            background-color: white;
-            border-radius: 0;
-            image-rendering: pixelated;
-            width: 8px;
-            height: 8px;
-        }
-        
-        .avatar-container {
-            position: relative;
-            margin-bottom: 40px;
-        }
-        
-        .avatar {
-            width: 180px;
-            height: 180px;
-            border-radius: 10px;
-            object-fit: cover;
-            border: 8px solid #555555;
-            box-shadow: 
-                0 0 0 4px #333333,
-                0 10px 30px rgba(0, 0, 0, 0.8);
-            animation: float 6s ease-in-out infinite;
-            image-rendering: pixelated;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-        
-        .pixel-border {
-            position: absolute;
-            top: -12px;
-            left: -12px;
-            right: -12px;
-            bottom: -12px;
-            border: 6px solid transparent;
-            border-image: repeating-linear-gradient(45deg, var(--mc-green), var(--mc-green) 10px, var(--mc-dark-green) 10px, var(--mc-dark-green) 20px) 6;
-            animation: spin 8s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .name {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            color: var(--mc-green);
-            text-align: center;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s forwards 0.3s;
-            text-shadow: 
-                3px 3px 0 #000000,
-                5px 5px 0 rgba(0, 170, 0, 0.3);
-        }
-        
-        .tagline {
-            font-size: 1.8rem;
-            color: var(--mc-gray);
-            margin-bottom: 40px;
-            max-width: 700px;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s forwards 0.6s;
-            text-shadow: 2px 2px 0 #000000;
-        }
-        
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .scroll-hint {
-            position: absolute;
-            bottom: 40px;
-            color: var(--mc-gray);
-            font-size: 1.2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            opacity: 0;
-            animation: fadeIn 1s forwards 1.2s;
-            text-shadow: 1px 1px 0 #000000;
-        }
-        
-        .scroll-hint i {
-            font-size: 1.5rem;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-        
-        /* 文稿区域 - Minecraft风格 */
-        .section-title {
-            text-align: center;
-            font-size: 3.5rem;
-            margin-bottom: 60px;
-            color: var(--mc-green);
-            position: relative;
-            opacity: 0;
-            transform: translateY(30px);
-            text-shadow: 
-                3px 3px 0 #000000,
-                5px 5px 0 rgba(0, 170, 0, 0.3);
-        }
-        
-        .section-title.animated {
-            animation: fadeInUp 1s forwards;
-        }
-        
-        .section-title:after {
-            content: '';
-            position: absolute;
-            width: 300px;
-            height: 8px;
-            background: 
-                repeating-linear-gradient(90deg, 
-                    transparent, 
-                    transparent 10px, 
-                    var(--mc-green) 10px, 
-                    var(--mc-green) 20px);
-            bottom: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .scripts-container {
-            max-width: 1300px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 35px;
-        }
-        
-        .script-card {
-            background: 
-                linear-gradient(145deg, #1a1a1a, #0f0f0f);
-            border-radius: 0;
-            padding: 25px;
-            box-shadow: 
-                8px 8px 0 #000000,
-                inset 0 0 0 4px #333333;
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(50px);
-            border: 4px solid #555555;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .script-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, var(--mc-green), var(--mc-dark-green));
-        }
-        
-        .script-card.animated {
-            animation: cardAppear 0.8s forwards;
-        }
-        
-        @keyframes cardAppear {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .script-card:nth-child(1) { animation-delay: 0.1s; }
-        .script-card:nth-child(2) { animation-delay: 0.2s; }
-        .script-card:nth-child(3) { animation-delay: 0.3s; }
-        .script-card:nth-child(4) { animation-delay: 0.4s; }
-        
-        .script-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 
-                12px 12px 0 #000000,
-                inset 0 0 0 4px #555555;
-            border-color: var(--mc-green);
-        }
-        
-        .script-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: var(--mc-green);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-shadow: 2px 2px 0 #000000;
-        }
-        
-        .script-title i {
-            font-size: 1.6rem;
-            color: var(--mc-gray);
-        }
-        
-        .script-content {
-            color: var(--mc-gray);
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            min-height: 200px;
-            font-size: 1.1rem;
-            line-height: 1.7;
-            outline: none;
-            border: 4px solid #333333;
-            transition: all 0.3s ease;
-            resize: vertical;
-            font-family: 'Minecraft', monospace;
-            letter-spacing: 1px;
-        }
-        
-        .script-content:focus {
-            border-color: var(--mc-green);
-            box-shadow: inset 0 0 10px rgba(85, 255, 85, 0.3);
-        }
-        
-        .script-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: #555555;
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: #0a0a0c; 
             color: white;
-            font-size: 1.3rem;
-            margin-right: 10px;
-            border: 4px solid #333333;
-            box-shadow: 2px 2px 0 #000000;
-            image-rendering: pixelated;
-        }
-        
-        /* 社交区域 - Minecraft风格 */
-        .social-cards {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
-            gap: 50px;
-            margin: 60px 0;
-            max-width: 1000px;
-        }
-        
-        .social-card {
-            width: 320px;
-            background: 
-                linear-gradient(145deg, #1a1a1a, #0f0f0f);
-            border-radius: 0;
-            padding: 30px;
-            text-decoration: none;
-            color: var(--text-primary);
-            transition: all 0.4s ease;
-            display: flex;
-            flex-direction: column;
             align-items: center;
-            box-shadow: 
-                10px 10px 0 #000000,
-                inset 0 0 0 4px #333333;
-            position: relative;
             overflow: hidden;
-            opacity: 0;
-            transform: translateY(50px);
-            border: 4px solid #555555;
         }
-        
-        .social-card.animated {
-            animation: slideUp 0.8s forwards;
-        }
-        
-        .social-card.bilibili { animation-delay: 0.2s; }
-        .social-card.youtube { animation-delay: 0.4s; }
-        
-        @keyframes slideUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .social-card:before {
-            content: '';
-            position: absolute;
+
+        /* 动态背景 */
+        .bg-wrapper {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 8px;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #16162d 0%, #050506 100%);
         }
-        
-        .social-card.bilibili:before {
-            background: linear-gradient(90deg, var(--accent-pink), #ff3a6e);
-        }
-        
-        .social-card.youtube:before {
-            background: linear-gradient(90deg, var(--accent-red), #cc0000);
-        }
-        
-        .social-card:hover {
-            transform: translateY(-15px);
-            border-color: #777777;
-            box-shadow: 
-                15px 15px 0 #000000,
-                inset 0 0 0 4px #555555;
-        }
-        
-        .social-card.bilibili:hover {
-            border-color: var(--accent-pink);
-        }
-        
-        .social-card.youtube:hover {
-            border-color: var(--accent-red);
-        }
-        
-        .social-icon-container {
-            width: 100px;
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 25px;
-            font-size: 3rem;
-            position: relative;
-            transition: all 0.3s ease;
-            border: 6px solid #333333;
-            background-color: #222222;
-            box-shadow: 
-                inset 0 0 0 4px #555555,
-                4px 4px 0 #000000;
-            image-rendering: pixelated;
-        }
-        
-        .social-card.bilibili .social-icon-container {
-            color: var(--accent-pink);
-            border-color: #444444;
-        }
-        
-        .social-card.youtube .social-icon-container {
-            color: var(--accent-red);
-            border-color: #444444;
-        }
-        
-        .social-card:hover .social-icon-container {
-            transform: scale(1.1) rotate(5deg);
-            border-color: #666666;
-        }
-        
-        .social-name {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            text-shadow: 3px 3px 0 #000000;
-        }
-        
-        .social-card.bilibili .social-name {
-            color: var(--accent-pink);
-        }
-        
-        .social-card.youtube .social-name {
-            color: var(--accent-red);
-        }
-        
-        .social-desc {
-            color: var(--mc-gray);
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            text-shadow: 1px 1px 0 #000000;
-        }
-        
-        .fans-count {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.4rem;
-            color: var(--mc-green);
-            margin-top: 15px;
-            padding: 10px 20px;
-            border: 4px solid #333333;
-            background-color: #222222;
-            text-shadow: 1px 1px 0 #000000;
-            box-shadow: inset 0 0 0 2px #555555;
-        }
-        
-        .fans-count i {
-            color: var(--mc-green);
-        }
-        
-        .thank-you {
-            margin-top: 80px;
-            font-size: 2.2rem;
-            color: var(--mc-gray);
-            max-width: 700px;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(30px);
-            text-shadow: 2px 2px 0 #000000;
-        }
-        
-        .thank-you.animated {
-            animation: fadeInUp 1s forwards 0.8s;
-        }
-        
-        .thank-you span {
-            color: var(--mc-green);
-            position: relative;
-            display: inline-block;
-            text-shadow: 2px 2px 0 #000000;
-        }
-        
-        .thank-you span:after {
-            content: '';
+
+        .bg-grid {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: 
-                repeating-linear-gradient(90deg, 
-                    transparent, 
-                    transparent 5px, 
-                    var(--mc-green) 5px, 
-                    var(--mc-green) 10px);
-            animation: underline 3s infinite;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background-image: 
+                linear-gradient(rgba(122, 92, 245, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(122, 92, 245, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(1000px) rotateX(60deg);
+            animation: gridMove 15s linear infinite;
         }
-        
-        @keyframes underline {
-            0%, 100% { transform: scaleX(0); opacity: 0; }
-            50% { transform: scaleX(1); opacity: 1; }
+
+        @keyframes gridMove {
+            0% { transform: perspective(1000px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(1000px) rotateX(60deg) translateY(50px); }
         }
-        
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .name {
-                font-size: 2.8rem;
-            }
-            
-            .tagline {
-                font-size: 1.4rem;
-                padding: 0 15px;
-            }
-            
-            .scripts-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .social-cards {
-                flex-direction: column;
-                align-items: center;
-                gap: 40px;
-            }
-            
-            .social-card {
-                width: 100%;
-                max-width: 400px;
-            }
-            
-            .section-title {
-                font-size: 2.5rem;
-            }
+
+        /* --- 黑色圆角容器 --- */
+        .container {
+            width: 90%;
+            max-width: 420px; /* 稍微调宽了一点 */
+            text-align: center;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.85); /* 黑色背景 */
+            padding: 40px 20px;
+            border-radius: 30px; /* 明显的圆角 */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px); /* 磨砂玻璃效果 */
         }
+
+        /* 云朵头像 - 调大 */
+        .avatar-box {
+            width: 110px;
+            height: 110px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: avatarFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes avatarFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .avatar-box i { font-size: 55px; color: #fff; }
+
+        /* 标题和副标题 - 调大 */
+        h1 { font-size: 28px; margin: 10px 0; letter-spacing: 2px; }
+        .subtitle { color: #aaa; font-size: 15px; margin-bottom: 35px; letter-spacing: 4px; }
+
+        /* --- 链接卡片 - 调大 --- */
+        .links { display: flex; flex-direction: column; gap: 16px; }
+
+        .card {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 18px 24px; /* 增加内边距 */
+            border-radius: 16px;
+            text-decoration: none;
+            color: #eee;
+            display: flex;
+            align-items: center;
+            font-size: 17px; /* 字体调大 */
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover {
+            background: rgba(122, 92, 245, 0.3);
+            border-color: #7a5cf5;
+            transform: translateY(-3px);
+            color: white;
+        }
+
+        .card i, .card svg { 
+            width: 28px; 
+            margin-right: 15px; 
+            font-size: 24px; 
+            display: flex;
+            justify-content: center;
+        }
+
+        .fa-spotify { color: #1DB954; }
+        .fa-steam { color: #66c0f4; }
+        .fa-youtube { color: #ff0000; }
+        .bilibili-icon { fill: #fb7299; }
+
     </style>
 </head>
 <body>
-    <div class="scroll-container">
-        <!-- 第一部分：个人介绍 -->
-        <section class="section" id="header">
-            <div class="header-bg"></div>
-            <div class="minecraft-bg"></div>
-            <div class="header-particles" id="particles"></div>
-            
-            <div class="avatar-container">
-                <div class="pixel-border"></div>
-                <img src="https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="源額" class="avatar">
-            </div>
-            
-            <h1 class="name mc-title">源額</h1>
-            <p class="tagline mc-font">全网1.6k粉丝 | 专做Minecraft影片 | 红石科技 | 生存实况 | 模组介绍</p>
-            
-            <div class="scroll-hint mc-font">
-                <i class="fas fa-chevron-down"></i>
-                向下滑动
-            </div>
-        </section>
-        
-        <!-- 第二部分：视频文稿 -->
-        <section class="section" id="scripts" style="background-color: var(--gray-bg);">
-            <h2 class="section-title mc-title" id="scripts-title">视频文稿</h2>
-            <div class="scripts-container">
-                <div class="script-card" id="script1">
-                    <h3 class="script-title mc-bold"><span class="script-number">1</span><i class="fas fa-comments"></i> 读评论</h3>
-                    <div class="script-content mc-font" contenteditable="true">内容：敬请期待</div>
-                </div>
-                
-                <div class="script-card" id="script2">
-                    <h3 class="script-title mc-bold"><span class="script-number">2</span><i class="fas fa-chalkboard-teacher"></i> 教学视频</h3>
-                    <div class="script-content mc-font" contenteditable="true">内容：敬请期待</div>
-                </div>
-                
-                <div class="script-card" id="script3">
-                    <h3 class="script-title mc-bold"><span class="script-number">3</span><i class="fas fa-question-circle"></i> 暂时未定</h3>
-                    <div class="script-content mc-font" contenteditable="true">内容：敬请期待</div>
-                </div>
-                
-                <div class="script-card" id="script4">
-                    <h3 class="script-title mc-bold"><span class="script-number">4</span><i class="fas fa-question-circle"></i> 暂时未定</h3>
-                    <div class="script-content mc-font" contenteditable="true">内容：敬请期待</div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- 第三部分：社交链接 -->
-        <section class="section" id="social" style="background-color: var(--gray-card);">
-            <h2 class="section-title mc-title" id="social-title">关注我的频道</h2>
-            
-            <div class="social-cards">
-                <a href="https://space.bilibili.com/3546393341856275?spm_id_from=333.1007.0.0" target="_blank" class="social-card bilibili" id="bilibili-card">
-                    <div class="social-icon-container">
-                        <i class="fab fa-bilibili"></i>
-                    </div>
-                    <h3 class="social-name mc-title">哔哩哔哩</h3>
-                    <p class="social-desc mc-font">我的主要视频发布平台，更新最频繁！</p>
-                    <div class="fans-count mc-font">
-                        <i class="fas fa-users"></i>
-                        <span>粉丝数：62</span>
-                    </div>
-                </a>
-                
-                <a href="https://m.youtube.com/channel/UCh-DzP5PUASsL55P27GyRYg" target="_blank" class="social-card youtube" id="youtube-card">
-                    <div class="social-icon-container">
-                        <i class="fab fa-youtube"></i>
-                    </div>
-                    <h3 class="social-name mc-title">YouTube</h3>
-                    <p class="social-desc mc-font">国际平台，分享给全球Minecraft玩家！</p>
-                    <div class="fans-count mc-font">
-                        <i class="fas fa-users"></i>
-                        <span>粉丝数：2</span>
-                    </div>
-                </a>
-            </div>
-            
-            <div class="thank-you mc-font" id="thank-you-text">
-                感谢光顾 <span>源額的Minecraft世界</span>！<br>
-                记得订阅我的频道，不错过任何精彩内容！
-            </div>
-        </section>
+
+    <div class="bg-wrapper">
+        <div class="bg-grid"></div>
     </div>
 
-    <script>
-        // 创建像素粒子背景
-        function createParticles() {
-            const container = document.getElementById('particles');
-            const particleCount = 40;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                const size = Math.floor(Math.random() * 3) * 4 + 4;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                
-                const x = Math.random() * 100;
-                const y = Math.random() * 100;
-                particle.style.left = `${x}%`;
-                particle.style.top = `${y}%`;
-                
-                // 随机颜色
-                const colors = ['#55ff55', '#ffff55', '#ff5555', '#5555ff', '#ff55ff'];
-                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                
-                const duration = Math.random() * 20 + 10;
-                particle.style.animation = `float ${duration}s ease-in-out infinite`;
-                particle.style.animationDelay = `${Math.random() * 5}s`;
-                
-                container.appendChild(particle);
-            }
-        }
+    <div class="container">
+        <div class="avatar-box">
+            <i class="fas fa-cloud"></i>
+        </div>
         
-        // 滚动动画触发器
-        function initScrollAnimations() {
-            const observerOptions = {
-                threshold: 0.2,
-                rootMargin: '0px 0px -50px 0px'
-            };
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        if (entry.target.id === 'scripts-title') {
-                            entry.target.classList.add('animated');
-                            
-                            // 动画卡片
-                            const cards = document.querySelectorAll('.script-card');
-                            cards.forEach(card => card.classList.add('animated'));
-                        }
-                        
-                        if (entry.target.id === 'social-title') {
-                            entry.target.classList.add('animated');
-                            
-                            // 动画社交卡片
-                            const socialCards = document.querySelectorAll('.social-card');
-                            socialCards.forEach(card => card.classList.add('animated'));
-                            
-                            // 动画感谢文本
-                            const thankYou = document.getElementById('thank-you-text');
-                            setTimeout(() => {
-                                thankYou.classList.add('animated');
-                            }, 300);
-                        }
-                    }
-                });
-            }, observerOptions);
-            
-            // 观察标题元素
-            const titles = document.querySelectorAll('.section-title');
-            titles.forEach(title => observer.observe(title));
-        }
-        
-        // 初始化
-        document.addEventListener('DOMContentLoaded', function() {
-            createParticles();
-            initScrollAnimations();
-            
-            // 内容编辑功能
-            document.querySelectorAll('.script-content').forEach(el => {
-                el.addEventListener('focus', function() {
-                    this.style.borderColor = 'var(--mc-green)';
-                    this.style.boxShadow = 'inset 0 0 10px rgba(85, 255, 85, 0.3)';
-                });
-                
-                el.addEventListener('blur', function() {
-                    this.style.borderColor = '#333333';
-                    this.style.boxShadow = 'none';
-                });
-                
-                el.addEventListener('input', function() {
-                    console.log('文稿内容已更新');
-                    // 可以在这里添加保存功能
-                });
-            });
-            
-            // 卡片悬停效果增强
-            document.querySelectorAll('.script-card, .social-card').forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.zIndex = '10';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.zIndex = '1';
-                });
-            });
-            
-            // 添加像素化点击效果
-            document.querySelectorAll('.social-card, .script-card').forEach(card => {
-                card.addEventListener('mousedown', function() {
-                    this.style.transform = 'translateY(5px)';
-                    this.style.boxShadow = this.style.boxShadow.replace(/15px 15px/g, '10px 10px').replace(/12px 12px/g, '7px 7px').replace(/10px 10px/g, '5px 5px').replace(/8px 8px/g, '3px 3px');
-                });
-                
-                card.addEventListener('mouseup', function() {
-                    this.style.transform = '';
-                    this.style.boxShadow = this.style.boxShadow.replace(/10px 10px/g, '15px 15px').replace(/7px 7px/g, '12px 12px').replace(/5px 5px/g, '10px 10px').replace(/3px 3px/g, '8px 8px');
-                });
-            });
-            
-            // 平滑滚动到锚点
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    if(targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if(targetElement) {
-                        targetElement.scrollIntoView({ 
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-        });
-    </script>
+        <h1>YUAN_E</h1>
+        <p class="subtitle">初中小孩 :)</p>
+
+        <div class="links">
+            <a href="#" target="_blank" class="card">
+                <i class="fab fa-spotify"></i><span>Spotify</span>
+            </a>
+
+            <a href="https://steamcommunity.com/profiles/76561198764721039/" target="_blank" class="card">
+                <i class="fab fa-steam"></i><span>Steam</span>
+            </a>
+
+            <a href="https://space.bilibili.com/3546393341856275" target="_blank" class="card">
+                <svg class="bilibili-icon" viewBox="0 0 1024 1024">
+                    <path d="M777.9 171.4c0.4-0.5 0.8-1 1.2-1.5 4.1-5 2.8-8.7-2.8-11.2-5.8-2.5-11.7-2.9-18 4.1-4.1 4.5-8.1 9.1-12.1 13.8L651 281.3H373l-95.2-104.7c-4-4.7-8-9.3-12.1-13.8-6.3-7-12.2-6.6-18-4.1-5.6 2.5-6.9 6.2-2.8 11.2 0.4 0.5 0.8 1 1.2 1.5l104.6 114.7H214.9c-50.6 0-91.6 41-91.6 91.6v407c0 50.6 41 91.6 91.6 91.6h594.2c50.6 0 91.6-41 91.6-91.6V377.1c0-50.6-41-91.6-91.6-91.6H673.3l104.6-114.1zM288.2 463.3c34.4 0 62.3 27.9 62.3 62.3s-27.9 62.3-62.3 62.3-62.3-27.9-62.3-62.3 27.9-62.3 62.3-62.3z m447.6 124.6c-34.4 0-62.3-27.9-62.3-62.3s27.9-62.3 62.3-62.3 62.3 27.9 62.3 62.3-27.9 62.3-62.3 62.3z"></path>
+                </svg>
+                <span>Bilibili</span>
+            </a>
+
+            <a href="https://m.youtube.com/channel/UCh-DzP5PUASsL55P27GyRYg" target="_blank" class="card">
+                <i class="fab fa-youtube"></i><span>YouTube</span>
+            </a>
+        </div>
+    </div>
+
 </body>
 </html>
