@@ -6,12 +6,13 @@
     <title>YUAN_E | Bio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
+        /* 全局基础 */
         body, html {
             margin: 0;
             padding: 0;
             height: 100vh;
             font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            background: #0a0a0c; 
+            background: #050505; 
             color: white;
             display: flex;
             justify-content: center;
@@ -19,6 +20,7 @@
             overflow: hidden;
         }
 
+        /* 动态背景 */
         .bg-wrapper {
             position: fixed;
             top: 0;
@@ -26,7 +28,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: radial-gradient(circle at center, #16162d 0%, #050506 100%);
+            background: radial-gradient(circle at center, #1a1a3a 0%, #000 100%);
         }
 
         .bg-grid {
@@ -36,36 +38,38 @@
             top: -50%;
             left: -50%;
             background-image: 
-                linear-gradient(rgba(122, 92, 245, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(122, 92, 245, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
+                linear-gradient(rgba(122, 92, 245, 0.12) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(122, 92, 245, 0.12) 1px, transparent 1px);
+            background-size: 60px 60px;
             transform: perspective(1000px) rotateX(60deg);
-            animation: gridMove 15s linear infinite;
+            animation: gridMove 12s linear infinite;
         }
 
         @keyframes gridMove {
             0% { transform: perspective(1000px) rotateX(60deg) translateY(0); }
-            100% { transform: perspective(1000px) rotateX(60deg) translateY(50px); }
+            100% { transform: perspective(1000px) rotateX(60deg) translateY(60px); }
         }
 
+        /* --- 黑色圆角容器 (显示内容调大) --- */
         .container {
-            width: 90%;
-            max-width: 420px;
+            width: 92%;
+            max-width: 450px; /* 进一步调宽 */
             text-align: center;
             z-index: 10;
-            background: rgba(0, 0, 0, 0.85); 
-            padding: 45px 20px;
-            border-radius: 35px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(12px);
+            background: rgba(0, 0, 0, 0.9); /* 纯黑背景，微透 */
+            padding: 50px 30px; /* 增加内边距 */
+            border-radius: 40px; /* 大圆角 */
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
         }
 
+        /* 头像 - 调大 */
         .avatar-box {
-            width: 115px;
-            height: 115px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 32px;
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 35px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -76,41 +80,43 @@
 
         @keyframes avatarFloat {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-12px); }
         }
 
-        .avatar-box i { font-size: 60px; color: #fff; }
+        .avatar-box i { font-size: 65px; color: #fff; filter: drop-shadow(0 0 10px rgba(255,255,255,0.3)); }
 
-        h1 { font-size: 32px; margin: 10px 0; letter-spacing: 2px; }
-        .subtitle { color: #aaa; font-size: 16px; margin-bottom: 40px; letter-spacing: 4px; }
+        /* 文字内容 - 调大 */
+        h1 { font-size: 34px; margin: 15px 0; letter-spacing: 3px; font-weight: 600; }
+        .subtitle { color: #999; font-size: 17px; margin-bottom: 45px; letter-spacing: 5px; }
 
-        .links { display: flex; flex-direction: column; gap: 18px; }
+        /* 链接卡片 - 调大 */
+        .links { display: flex; flex-direction: column; gap: 20px; }
 
         .card {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 20px 26px;
-            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 22px 28px;
+            border-radius: 20px;
             text-decoration: none;
-            color: #eee;
+            color: #fff;
             display: flex;
             align-items: center;
-            font-size: 18px;
-            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 19px; /* 字体加大 */
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         .card:hover {
-            background: rgba(122, 92, 245, 0.35);
+            background: rgba(122, 92, 245, 0.3);
             border-color: #7a5cf5;
-            transform: translateY(-4px) scale(1.02);
-            color: white;
-            box-shadow: 0 10px 20px rgba(122, 92, 245, 0.2);
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 12px 25px rgba(122, 92, 245, 0.25);
         }
 
         .card i, .card svg { 
-            width: 30px; 
-            margin-right: 18px; 
-            font-size: 26px; 
+            width: 32px; 
+            margin-right: 20px; 
+            font-size: 28px; 
             display: flex;
             justify-content: center;
         }
@@ -119,6 +125,7 @@
         .fa-steam { color: #66c0f4; }
         .fa-youtube { color: #ff0000; }
         .bilibili-icon { fill: #fb7299; }
+
     </style>
 </head>
 <body>
@@ -136,7 +143,7 @@
         <p class="subtitle">初中小孩 :)</p>
 
         <div class="links">
-            <a href="https://open.spotify.com/" target="_blank" class="card">
+            <a href="http://googleusercontent.com/spotify.com/4" target="_blank" class="card">
                 <i class="fab fa-spotify"></i><span>Spotify</span>
             </a>
 
