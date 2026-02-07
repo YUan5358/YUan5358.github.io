@@ -6,7 +6,6 @@
     <title>YUAN_E | Bio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        /* 全局基础 */
         body, html {
             margin: 0;
             padding: 0;
@@ -20,7 +19,6 @@
             overflow: hidden;
         }
 
-        /* 动态背景 */
         .bg-wrapper {
             position: fixed;
             top: 0;
@@ -50,30 +48,28 @@
             100% { transform: perspective(1000px) rotateX(60deg) translateY(50px); }
         }
 
-        /* --- 黑色圆角容器 --- */
         .container {
             width: 90%;
-            max-width: 420px; /* 稍微调宽了一点 */
+            max-width: 420px;
             text-align: center;
             z-index: 10;
-            background: rgba(0, 0, 0, 0.85); /* 黑色背景 */
-            padding: 40px 20px;
-            border-radius: 30px; /* 明显的圆角 */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px); /* 磨砂玻璃效果 */
+            background: rgba(0, 0, 0, 0.85); 
+            padding: 45px 20px;
+            border-radius: 35px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
         }
 
-        /* 云朵头像 - 调大 */
         .avatar-box {
-            width: 110px;
-            height: 110px;
+            width: 115px;
+            height: 115px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
+            border-radius: 32px;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0 auto 20px;
+            margin: 0 auto 25px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             animation: avatarFloat 3s ease-in-out infinite;
         }
@@ -83,39 +79,38 @@
             50% { transform: translateY(-10px); }
         }
 
-        .avatar-box i { font-size: 55px; color: #fff; }
+        .avatar-box i { font-size: 60px; color: #fff; }
 
-        /* 标题和副标题 - 调大 */
-        h1 { font-size: 28px; margin: 10px 0; letter-spacing: 2px; }
-        .subtitle { color: #aaa; font-size: 15px; margin-bottom: 35px; letter-spacing: 4px; }
+        h1 { font-size: 32px; margin: 10px 0; letter-spacing: 2px; }
+        .subtitle { color: #aaa; font-size: 16px; margin-bottom: 40px; letter-spacing: 4px; }
 
-        /* --- 链接卡片 - 调大 --- */
-        .links { display: flex; flex-direction: column; gap: 16px; }
+        .links { display: flex; flex-direction: column; gap: 18px; }
 
         .card {
-            background: rgba(255, 255, 255, 0.07);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 18px 24px; /* 增加内边距 */
-            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 20px 26px;
+            border-radius: 18px;
             text-decoration: none;
             color: #eee;
             display: flex;
             align-items: center;
-            font-size: 17px; /* 字体调大 */
+            font-size: 18px;
             transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .card:hover {
-            background: rgba(122, 92, 245, 0.3);
+            background: rgba(122, 92, 245, 0.35);
             border-color: #7a5cf5;
-            transform: translateY(-3px);
+            transform: translateY(-4px) scale(1.02);
             color: white;
+            box-shadow: 0 10px 20px rgba(122, 92, 245, 0.2);
         }
 
         .card i, .card svg { 
-            width: 28px; 
-            margin-right: 15px; 
-            font-size: 24px; 
+            width: 30px; 
+            margin-right: 18px; 
+            font-size: 26px; 
             display: flex;
             justify-content: center;
         }
@@ -124,7 +119,6 @@
         .fa-steam { color: #66c0f4; }
         .fa-youtube { color: #ff0000; }
         .bilibili-icon { fill: #fb7299; }
-
     </style>
 </head>
 <body>
@@ -142,7 +136,7 @@
         <p class="subtitle">初中小孩 :)</p>
 
         <div class="links">
-            <a href="#" target="_blank" class="card">
+            <a href="https://open.spotify.com/" target="_blank" class="card">
                 <i class="fab fa-spotify"></i><span>Spotify</span>
             </a>
 
