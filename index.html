@@ -6,44 +6,53 @@
     <title>YUAN_E | Bio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        /* 全局基础 - 确保占满全屏且无边距 */
-        body, html {
+        /* 全局基础 */
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
             width: 100%;
             height: 100%;
             font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            background: #050505; 
             color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
-        /* 动态网格背景 */
-        .bg-wrapper {
+        /* 应用新背景图 */
+        body {
+            background: #050505 url('https://s41.ax1x.com/2026/02/18/pZOI2M4.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        /* 增强可读性的背景遮罩层 */
+        body::before {
+            content: '';
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background: rgba(0, 0, 0, 0.75); /* 深色半透明遮罩，确保文字清晰 */
             z-index: -1;
-            background: radial-gradient(circle at center, #1a1a3a 0%, #000 100%);
         }
 
+        /* 动态网格效果 - 保留但透明度降低 */
         .bg-grid {
-            position: absolute;
+            position: fixed;
             width: 200%;
             height: 200%;
             top: -50%;
             left: -50%;
-            background-image: 
-                linear-gradient(rgba(122, 92, 245, 0.15) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(122, 92, 245, 0.15) 1px, transparent 1px);
+            background-image:
+                linear-gradient(rgba(122, 92, 245, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(122, 92, 245, 0.08) 1px, transparent 1px);
             background-size: 60px 60px;
             transform: perspective(1000px) rotateX(60deg);
             animation: gridMove 12s linear infinite;
+            z-index: -1;
+            pointer-events: none;
         }
 
         @keyframes gridMove {
@@ -51,40 +60,45 @@
             100% { transform: perspective(1000px) rotateX(60deg) translateY(60px); }
         }
 
-        /* --- 核心黑色内容框 --- */
+        /* 核心容器 - 确保在手机和电脑上居中并良好显示 */
         .container {
-            width: 90%;
-            max-width: 440px; /* PC端限制宽度，手机端自动适应 */
+            width: 90vw; /* 使用视窗宽度单位，实现响应式 */
+            max-width: 440px; /* 电脑端最大宽度限制 */
+            min-height: 80vh; /* 确保在较矮的手机屏幕上也有足够高度 */
+            margin: 10vh auto; /* 垂直居中 */
             text-align: center;
-            z-index: 10;
-            background: rgba(0, 0, 0, 0.9);大圆角 */
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85); /* 更深的半透明背景，增强文字对比度 */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px; /* 大圆角 */
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            transition: transform 0.3s ease;
+            padding: 30px 20px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        /* PC悬停特效 */
-        @media (min-width: 768px) {
-            .container:hover {
-                transform: scale(1.01);
-                border-color: rgba(122, 92, 245, 0.3);
-            }
-        }
-
-        /* 头像调大 */
+        /* 头像区域 - 使用新头像图 */
         .avatar-box {
             width: 120px;
             height: 120px;
-            background: rgba(255, 255, 255, 0.08);
             border-radius: 35px;
+            margin: 0 auto 25px;
+            overflow: hidden; /* 确保图片适应圆角 */
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0 auto 25px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
             animation: avatarFloat 3s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .avatar-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 确保图片填充整个头像框 */
         }
 
         @keyframes avatarFloat {
@@ -92,70 +106,100 @@
             50% { transform: translateY(-12px); }
         }
 
-        .avatar-box i { font-size: 65px; color: #fff; filter: drop-shadow(0 0 10px rgba(255,255,255,0.3)); }
-
         /* 文字内容 */
-        h1 { font-size: 34px; margin: 15px 0; letter-spacing: 3px; font-weight: 600; }
-        .subtitle { color: #aaa; font-size: 17px; margin-bottom: 45px; letter-spacing: 5px; }
+        h1 {
+            font-size: 34px;
+            margin: 15px 0 10px;
+            letter-spacing: 3px;
+            font-weight: 600;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        .subtitle {
+            color: #ccc;
+            font-size: 17px;
+            margin-bottom: 40px;
+            letter-spacing: 5px;
+        }
 
-        /* 链接卡片调大 */
-        .links { display: flex; flex-direction: column; gap: 18px; }
+        /* 链接卡片区域 */
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
 
         .card {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             padding: 22px 28px;
             border-radius: 20px;
             text-decoration: none;
             color: #fff;
             display: flex;
             align-items: center;
-            font-size: 19px; 
+            font-size: 19px;
             font-weight: 500;
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         .card:hover {
-            background: rgba(122, 92, 245, 0.3);
+            background: rgba(122, 92, 245, 0.35);
             border-color: #7a5cf5;
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(122, 92, 245, 0.2);
+            box-shadow: 0 10px 25px rgba(122, 92, 245, 0.25);
         }
 
-        .card i, .card svg { 
-            width: 32px; 
-            margin-right: 20px; 
-            font-size: 28px; 
+        .card i, .card svg {
+            width: 32px;
+            margin-right: 20px;
+            font-size: 28px;
             display: flex;
             justify-content: center;
         }
 
-        .fa-spotify { color: #1DB954; }
+        /* 移除 Spotify 卡片 */
+        .card[href*="spotify"] {
+            display: none;
+        }
+
+        /* 图标颜色保持不变 */
         .fa-steam { color: #66c0f4; }
         .fa-youtube { color: #ff0000; }
         .bilibili-icon { fill: #fb7299; }
+
+        /* 手机端特定优化 */
+        @media (max-width: 480px) {
+            .container {
+                width: 95vw;
+                padding: 25px 15px;
+                border-radius: 25px;
+                margin: 5vh auto;
+            }
+            h1 { font-size: 28px; }
+            .subtitle { font-size: 15px; letter-spacing: 3px; }
+            .card {
+                padding: 18px 22px;
+                font-size: 17px;
+            }
+        }
 
     </style>
 </head>
 <body>
 
-    <div class="bg-wrapper">
-        <div class="bg-grid"></div>
-    </div>
+    <div class="bg-grid"></div>
 
     <div class="container">
+        <!-- 头像：使用您指定的 pZOIyGT.png 图片 -->
         <div class="avatar-box">
-            <i class="fas fa-cloud"></i>
+            <img src="https://s41.ax1x.com/2026/02/18/pZOIyGT.png" alt="Yuanawa Avatar">
         </div>
-        
+
         <h1>YUAN_E</h1>
         <p class="subtitle">初中小孩 :)</p>
 
         <div class="links">
-            <a href="open.spotify.com/user/316yxz3w3te7g7t3q65ov3vqnqq4" target="_blank" class="card">
-                <i class="fab fa-spotify"></i><span>Spotify</span>
-            </a>
-
+            <!-- 根据您的要求，Spotify 链接已被移除 -->
             <a href="https://steamcommunity.com/profiles/76561198764721039/" target="_blank" class="card">
                 <i class="fab fa-steam"></i><span>Steam</span>
             </a>
