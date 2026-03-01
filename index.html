@@ -6,216 +6,58 @@
     <title>YUAN_E | Bio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        /* 全局基础 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body, html {
-            width: 100%;
-            height: 100%;
-            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            color: white;
-            overflow-x: hidden;
-        }
-
-        /* 应用新的背景图 pZjgO6s.jpg */
-        body {
-            background: #050505 url('https://s41.ax1x.com/2026/02/22/pZjgO6s.md.jpg') no-repeat center center fixed;
-            background-size: cover;
-        }
-
-        /* 增强可读性的背景遮罩层 */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.75); /* 深色半透明遮罩，确保文字清晰 */
-            z-index: -1;
-        }
-
-        /* 动态网格效果 - 保留但透明度降低 */
-        .bg-grid {
-            position: fixed;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            background-image:
-                linear-gradient(rgba(122, 92, 245, 0.08) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(122, 92, 245, 0.08) 1px, transparent 1px);
-            background-size: 60px 60px;
-            transform: perspective(1000px) rotateX(60deg);
-            animation: gridMove 12s linear infinite;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        @keyframes gridMove {
-            0% { transform: perspective(1000px) rotateX(60deg) translateY(0); }
-            100% { transform: perspective(1000px) rotateX(60deg) translateY(60px); }
-        }
-
-        /* 核心容器 - 确保在手机和电脑上居中并良好显示 */
-        .container {
-            width: 90vw; /* 使用视窗宽度单位，实现响应式 */
-            max-width: 440px; /* 电脑端最大宽度限制 */
-            min-height: 80vh; /* 确保在较矮的手机屏幕上也有足够高度 */
-            margin: 10vh auto; /* 垂直居中 */
-            text-align: center;
-            background: rgba(0, 0, 0, 0.85); /* 更深的半透明背景，增强文字对比度 */
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 30px; /* 大圆角 */
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            padding: 30px 20px;
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        /* 头像区域 - 使用之前的头像图 */
-        .avatar-box {
-            width: 120px;
-            height: 120px;
-            border-radius: 35px;
-            margin: 0 auto 25px;
-            overflow: hidden; /* 确保图片适应圆角 */
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: avatarFloat 3s ease-in-out infinite;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .avatar-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* 确保图片填充整个头像框 */
-        }
-
-        @keyframes avatarFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
-        }
-
-        /* 文字内容 */
-        h1 {
-            font-size: 34px;
-            margin: 15px 0 10px;
-            letter-spacing: 3px;
-            font-weight: 600;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-        }
-        .subtitle {
-            color: #ccc;
-            font-size: 17px;
-            margin-bottom: 40px;
-            letter-spacing: 5px;
-        }
-
-        /* 链接卡片区域 */
-        .links {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 22px 28px;
-            border-radius: 20px;
-            text-decoration: none;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            font-size: 19px;
-            font-weight: 500;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-
-        .card:hover {
-            background: rgba(122, 92, 245, 0.35);
-            border-color: #7a5cf5;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(122, 92, 245, 0.25);
-        }
-
-        .card i, .card svg {
-            width: 32px;
-            margin-right: 20px;
-            font-size: 28px;
-            display: flex;
-            justify-content: center;
-        }
-
-        /* 移除 Spotify 卡片 */
-        .card[href*="spotify"] {
-            display: none;
-        }
-
-        /* 图标颜色保持不变 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { width: 100%; height: 100%; font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; color: white; overflow-x: hidden; }
+        body { background: #050505 url('https://s41.ax1x.com/2026/02/22/pZjgO6s.md.jpg') no-repeat center center fixed; background-size: cover; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); z-index: -1; }
+        .bg-grid { position: fixed; width: 200%; height: 200%; top: -50%; left: -50%; background-image: linear-gradient(rgba(122, 92, 245, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(122, 92, 245, 0.08) 1px, transparent 1px); background-size: 60px 60px; transform: perspective(1000px) rotateX(60deg); animation: gridMove 12s linear infinite; z-index: -1; pointer-events: none; }
+        @keyframes gridMove { 0% { transform: perspective(1000px) rotateX(60deg) translateY(0); } 100% { transform: perspective(1000px) rotateX(60deg) translateY(60px); } }
+        .container { width: 90vw; max-width: 440px; min-height: 80vh; margin: 10vh auto; text-align: center; background: rgba(0, 0, 0, 0.85); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 30px; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); padding: 30px 20px; box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9); display: flex; flex-direction: column; justify-content: center; }
+        .avatar-box { width: 120px; height: 120px; border-radius: 35px; margin: 0 auto 25px; overflow: hidden; border: 2px solid rgba(255, 255, 255, 0.3); background: rgba(255, 255, 255, 0.1); display: flex; justify-content: center; align-items: center; animation: avatarFloat 3s ease-in-out infinite; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
+        .avatar-box img { width: 100%; height: 100%; object-fit: cover; }
+        @keyframes avatarFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+        h1 { font-size: 34px; margin: 15px 0 10px; letter-spacing: 3px; font-weight: 600; text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); }
+        .subtitle { color: #ccc; font-size: 17px; margin-bottom: 40px; letter-spacing: 5px; }
+        .links { display: flex; flex-direction: column; gap: 18px; }
+        .card { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); padding: 22px 28px; border-radius: 20px; text-decoration: none; color: #fff; display: flex; align-items: center; font-size: 19px; font-weight: 500; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .card:hover { background: rgba(122, 92, 245, 0.35); border-color: #7a5cf5; transform: translateY(-5px); box-shadow: 0 10px 25px rgba(122, 92, 245, 0.25); }
+        .card i, .card svg { width: 32px; margin-right: 20px; font-size: 28px; display: flex; justify-content: center; }
+        .card[href*="spotify"] { display: none; }
+        .discord-svg-icon { fill: #5865F2; }
         .fa-steam { color: #66c0f4; }
         .fa-youtube { color: #ff0000; }
         .bilibili-icon { fill: #fb7299; }
-
-        /* 手机端特定优化 */
-        @media (max-width: 480px) {
-            .container {
-                width: 95vw;
-                padding: 25px 15px;
-                border-radius: 25px;
-                margin: 5vh auto;
-            }
-            h1 { font-size: 28px; }
-            .subtitle { font-size: 15px; letter-spacing: 3px; }
-            .card {
-                padding: 18px 22px;
-                font-size: 17px;
-            }
-        }
-
+        @media (max-width: 480px) { .container { width: 95vw; padding: 25px 15px; border-radius: 25px; margin: 5vh auto; } h1 { font-size: 28px; } .subtitle { font-size: 15px; letter-spacing: 3px; } .card { padding: 18px 22px; font-size: 17px; } }
     </style>
 </head>
 <body>
-
     <div class="bg-grid"></div>
-
     <div class="container">
-        <!-- 头像：使用您指定的 pZOIyGT.png 图片 -->
         <div class="avatar-box">
-            <img src="https://s41.ax1x.com/2026/02/18/pZOIyGT.png" alt="Yuanawa Avatar">
+            <img src="https://s41.ax1x.com/2026/02/18/pZOIyGT.png" alt="Avatar">
         </div>
-
         <h1>YUAN_E</h1>
         <p class="subtitle">初中小孩 :)</p>
-
         <div class="links">
-            <!-- 根据您的要求，Spotify 链接已被移除 -->
+            <a href="https://discord.gg/FQM7ArvvR" target="_blank" class="card">
+                <svg class="discord-svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.14 96.36" width="28" height="28">
+                    <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
+                </svg>
+                <span>Discord</span>
+            </a>
             <a href="https://steamcommunity.com/profiles/76561198764721039/" target="_blank" class="card">
                 <i class="fab fa-steam"></i><span>Steam</span>
             </a>
-
             <a href="https://space.bilibili.com/3546393341856275" target="_blank" class="card">
                 <svg class="bilibili-icon" viewBox="0 0 1024 1024">
                     <path d="M777.9 171.4c0.4-0.5 0.8-1 1.2-1.5 4.1-5 2.8-8.7-2.8-11.2-5.8-2.5-11.7-2.9-18 4.1-4.1 4.5-8.1 9.1-12.1 13.8L651 281.3H373l-95.2-104.7c-4-4.7-8-9.3-12.1-13.8-6.3-7-12.2-6.6-18-4.1-5.6 2.5-6.9 6.2-2.8 11.2 0.4 0.5 0.8 1 1.2 1.5l104.6 114.7H214.9c-50.6 0-91.6 41-91.6 91.6v407c0 50.6 41 91.6 91.6 91.6h594.2c50.6 0 91.6-41 91.6-91.6V377.1c0-50.6-41-91.6-91.6-91.6H673.3l104.6-114.1zM288.2 463.3c34.4 0 62.3 27.9 62.3 62.3s-27.9 62.3-62.3 62.3-62.3-27.9-62.3-62.3 27.9-62.3 62.3-62.3z m447.6 124.6c-34.4 0-62.3-27.9-62.3-62.3s27.9-62.3 62.3-62.3 62.3 27.9 62.3 62.3-27.9 62.3-62.3 62.3z"></path>
                 </svg>
                 <span>Bilibili</span>
             </a>
-
             <a href="https://m.youtube.com/channel/UCh-DzP5PUASsL55P27GyRYg" target="_blank" class="card">
                 <i class="fab fa-youtube"></i><span>YouTube</span>
             </a>
         </div>
     </div>
-
 </body>
 </html>
