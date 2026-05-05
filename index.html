@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YUAN_E|自娱自乐</title>
+    <title>YUAN_E | 你好</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { width: 100%; height: 100%; font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; color: white; overflow-x: hidden; }
+        body, html { width: 100%; height: 100%; font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; color: white; overflow-x: hidden; overflow-y: auto; }
         body { background: #050505 url('https://s41.ax1x.com/2026/04/03/peYnzut.jpg') no-repeat center center fixed; background-size: cover; }
         body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); z-index: -1; }
-        .container { width: 90vw; max-width: 440px; min-height: 80vh; margin: 10vh auto; text-align: center; background: rgba(0, 0, 0, 0.85); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 30px; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); padding: 30px 20px; box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9); display: flex; flex-direction: column; justify-content: center; }
-        .avatar-box { width: 120px; height: 120px; border-radius: 35px; margin: 0 auto 25px; overflow: hidden; border: 2px solid rgba(255, 255, 255, 0.3); background: rgba(255, 255, 255, 0.1); display: flex; justify-content: center; align-items: center; animation: avatarFloat 3s ease-in-out infinite; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
+        .snow-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        .snowflake { position: absolute; top: -10px; background: white; border-radius: 50%; opacity: 0.8; filter: blur(0.5px); }
+        @keyframes fall { 0% { transform: translateY(-10px) translateX(0px) rotate(0deg); opacity: 0.8; } 100% { transform: translateY(calc(100vh + 10px)) translateX(calc(20px * var(--wind))) rotate(360deg); opacity: 0.2; } }
+        .container { width: 90vw; max-width: 440px; min-height: 80vh; margin: 10vh auto; text-align: center; background: rgba(0, 0, 0, 0.85); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 30px; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); padding: 30px 20px; box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9); display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 2; }
+        .avatar-box { width: 120px; height: 120px; border-radius: 35px; margin: 0 auto 25px; overflow: hidden; border: 2px solid rgba(255, 255, 255, 0.3); background: rgba(255, 255, 255, 0.1); display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
         .avatar-box img { width: 100%; height: 100%; object-fit: cover; }
-        @keyframes avatarFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
         h1 { font-size: 34px; margin: 15px 0 10px; letter-spacing: 3px; font-weight: 600; text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); }
         .subtitle { color: #ccc; font-size: 17px; margin-bottom: 40px; letter-spacing: 5px; }
         .links { display: flex; flex-direction: column; gap: 18px; }
         .card { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); padding: 22px 28px; border-radius: 20px; text-decoration: none; color: #fff; display: flex; align-items: center; font-size: 19px; font-weight: 500; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
-        .card:hover { background: rgba(122, 92, 245, 0.35); border-color: #7a5cf5; transform: translateY(-5px); box-shadow: 0 10px 25px rgba(122, 92, 245, 0.25); }
+        .card:hover { transform: translateY(-5px); }
         .card i, .card svg { width: 32px; margin-right: 20px; font-size: 28px; display: flex; justify-content: center; }
         .card[href*="spotify"] { display: none; }
         .discord-svg-icon { fill: #5865F2; }
@@ -31,6 +33,7 @@
     </style>
 </head>
 <body>
+    <div class="snow-container" id="snow-container"></div>
     <div class="container">
         <div class="avatar-box">
             <img src="https://s41.ax1x.com/2026/02/18/pZOIyGT.png" alt="Avatar">
@@ -57,7 +60,33 @@
                 <i class="fab fa-youtube"></i><span>YouTube</span>
             </a>
         </div>
-        <a href="https://yuan5358.github.io/tupian/" target="_blank" class="sunshine-link">嘻嘻嘻</a>
+        <a href="https://yuan5358.github.io/tupian/" target="_blank" class="sunshine-link">点一下 </a>
     </div>
+    <script>
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            const size = Math.random() * 5 + 3;
+            snowflake.style.width = `${size}px`;
+            snowflake.style.height = `${size}px`;
+            snowflake.style.left = `${Math.random() * 100}vw`;
+            const duration = Math.random() * 5 + 8;
+            const delay = Math.random() * 5;
+            const wind = Math.random() * 10 - 5;
+            snowflake.style.animation = `fall ${duration}s linear ${delay}s infinite`;
+            snowflake.style.setProperty('--wind', wind);
+            snowflake.style.opacity = Math.random() * 0.7 + 0.3;
+            document.getElementById('snow-container').appendChild(snowflake);
+            setTimeout(() => { snowflake.remove(); }, (duration + delay) * 1000);
+        }
+        function createSnowflakes() {
+            const snowCount = 100;
+            for (let i = 0; i < snowCount; i++) {
+                setTimeout(() => { createSnowflake(); }, i * 300);
+            }
+            setInterval(() => { createSnowflake(); }, 300);
+        }
+        window.addEventListener('load', createSnowflakes);
+    </script>
 </body>
 </html>
