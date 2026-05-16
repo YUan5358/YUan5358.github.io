@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>下载</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        #snowCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .container { 
+            max-width: 600px; 
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2.8rem;
+            color: #ffffff;
+            margin-bottom: 8px;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(100, 181, 246, 0.3);
+        }
+        
+        h2 {
+            text-align: center;
+            font-size: 1.6rem;
+            color: #90caf9;
+            margin-bottom: 50px;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+        
+        .download-list { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 24px; 
+        }
+        
+        .download-item {
+            background: rgba(25, 25, 35, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 28px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .download-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .download-item h3 {
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .download-item p {
+            color: #b0b0b0;
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+        
+        .download-btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.2s;
+            letter-spacing: 0.5px;
+        }
+        
+        .download-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+        
+        .skin-btn {
+            background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+            color: white;
+        }
+        
+        .resource-btn {
+            background: linear-gradient(135deg, #388e3c 0%, #1b5e20 100%);
+            color: white;
+        }
+        
+        footer {
+            margin-top: 60px;
+            color: #888;
+            font-size: 0.85rem;
+            text-align: center;
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 480px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.4rem; }
+            .download-item { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="snowCanvas"></canvas>
+    
+    <div class="container">
+        <h1>下载</h1>
+        <h2>下载</h2>
+        
+        <div class="download-list">
+            <div class="download-item">
+                <h3>下载皮肤</h3>
+                <p>获取个性化皮肤资源，支持多种格式。</p>
+                <a href="https://release-assets.githubusercontent.com/github-production-release-asset/1240518982/ee1052d7-e554-4619-8ad2-e153c4b5940f?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-05-[...]
+                   class="download-btn skin-btn" 
+                   id="skinBtn"
+                   target="_blank"
+                   rel="noopener noreferrer">下载皮肤</a>
+            </div>
+            
+            <div class="download-item">
+                <h3>下载资源包</h3>
+                <p>包含图标、音效、纹理等完整资源文件。</p>
+                <a href="https://github.com/user-attachments/files/27851829/YuAnPaCk.zip" 
+                   class="download-btn resource-btn" 
+                   id="resourceBtn"
+                   target="_blank"
+                   rel="noopener noreferrer">下载资源包</a>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2026 下载中心</p>
+        </footer>
+    </div>
+    
+    <script>
+        const canvas = document.getElementById('snowCanvas');
+        const ctx = canvas.getContext('2d');
+        let snowflakes = [];
+        let animationId = null;
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        class Snowflake {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2.5 + 1;
+                this.speed = Math.random() * 0.8 + 0.4;
+                this.wind = Math.random() * 0.4 - 0.2;
+                this.opacity = Math.random() * 0.6 + 0.4;
+            }
+            
+            update() {
+                this.y += this.speed;
+                this.x += this.wind;
+                
+                if (this.y > canvas.height) {
+                    this.y = 0;
+                    this.x = Math.random() * canvas.width;
+                }
+                
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+            }
+            
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+        
+        function initSnow() {
+            snowflakes = [];
+            const count = Math.min(120, Math.floor(canvas.width * canvas.height / 10000));
+            
+            for (let i = 0; i < count; i++) {
+                snowflakes.push(new Snowflake());
+            }
+        }
+        
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let flake of snowflakes) {
+                flake.update();
+                flake.draw();
+            }
+            
+            animationId = requestAnimationFrame(animate);
+        }
+        
+        function setupAnimation() {
+            if (animationId) cancelAnimationFrame(animationId);
+            resizeCanvas();
+            initSnow();
+            animate();
+        }
+        
+        setupAnimation();
+        
+        window.addEventListener('resize', setupAnimation);
+        window.addEventListener('visibilitychange', () => {
+            if (!document.hidden) setupAnimation();
+        });
+    </script>
+</body>
+</html>
