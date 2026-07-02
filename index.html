@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>可怜人</title>
+    <title>YUAN_E | Bio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -13,35 +13,107 @@
         .snow-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
         .snowflake { position: absolute; top: -10px; background: white; border-radius: 50%; opacity: 0.8; filter: blur(0.5px); }
         @keyframes fall { 0% { transform: translateY(-10px) translateX(0px) rotate(0deg); opacity: 0.8; } 100% { transform: translateY(calc(100vh + 10px)) translateX(calc(20px * var(--wind))) rotate(360deg); opacity: 0.2; } }
-        .container { width: 90vw; max-width: 440px; min-height: 80vh; margin: 10vh auto; text-align: center; background: rgba(0, 0, 0, 0.85); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 30px; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); padding: 30px 20px; box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9); display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 2; }
-        .avatar-box { width: 120px; height: 120px; border-radius: 35px; margin: 0 auto 25px; overflow: hidden; border: 2px solid rgba(255, 255, 255, 0.3); background: rgba(255, 255, 255, 0.1); display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
+        .container { width: 90vw; max-width: 440px; min-height: 70vh; margin: 10vh auto; text-align: center; background: rgba(0, 0, 0, 0.85); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 30px; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); padding: 30px 20px; box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9); display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 2; }
+        .avatar-box { width: 115px; height: 115px; border-radius: 35px; margin: 0 auto 20px; overflow: hidden; border: 2px solid rgba(255, 255, 255, 0.3); background: rgba(255, 255, 255, 0.1); display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
         .avatar-box img { width: 100%; height: 100%; object-fit: cover; }
-        h1 { font-size: 34px; margin: 15px 0 10px; letter-spacing: 3px; font-weight: 600; text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); }
-        .subtitle { color: #ccc; font-size: 17px; margin-bottom: 40px; letter-spacing: 5px; }
-        .links { display: flex; flex-direction: column; gap: 18px; }
-        .card { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); padding: 22px 28px; border-radius: 20px; text-decoration: none; color: #fff; display: flex; align-items: center; font-size: 19px; font-weight: 500; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
-        .card:hover { transform: translateY(-5px); }
-        .card i, .card svg { width: 32px; margin-right: 20px; font-size: 28px; display: flex; justify-content: center; }
+        h1 { font-size: 34px; margin: 10px 0 6px; letter-spacing: 3px; font-weight: 600; text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); }
+        .subtitle { color: #ccc; font-size: 17px; margin-bottom: 30px; letter-spacing: 5px; }
+        .links { display: flex; flex-direction: column; gap: 10px; }
+        .card { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); padding: 18px 28px; border-radius: 18px; text-decoration: none; color: #fff; display: flex; align-items: center; font-size: 18px; font-weight: 500; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .card:hover { transform: translateY(-4px); }
+        .card i, .card svg { width: 28px; margin-right: 18px; font-size: 24px; display: flex; justify-content: center; }
         .card[href*="spotify"] { display: none; }
         .discord-svg-icon { fill: #5865F2; }
         .fa-steam { color: #66c0f4; }
         .fa-youtube { color: #ff0000; }
         .bilibili-icon { fill: #fb7299; }
-        .sunshine-link { display: block; width: 100%; padding: 18px 28px; background: rgba(255, 215, 0, 0.15); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 20px; text-decoration: none; color: #FFD700; font-size: 19px; font-weight: 500; text-align: center; transition: all 0.3s ease; margin-top: 30px; }
+        .sunshine-link { display: block; width: 100%; padding: 16px 28px; background: rgba(255, 215, 0, 0.15); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 18px; text-decoration: none; color: #FFD700; font-size: 18px; font-weight: 500; text-align: center; transition: all 0.3s ease; margin-top: 20px; }
         .sunshine-link:hover { background: rgba(255, 215, 0, 0.3); transform: translateY(-3px); box-shadow: 0 10px 25px rgba(255, 215, 0, 0.2); }
-        .download-link { display: block; margin-top: 20px; font-size: 12px; color: rgba(255, 255, 255, 0.3); text-decoration: none; text-align: center; transition: color 0.2s ease; }
+        .download-link { display: block; margin-top: 15px; font-size: 12px; color: rgba(255, 255, 255, 0.3); text-decoration: none; text-align: center; transition: color 0.2s ease; }
         .download-link:hover { color: rgba(255, 255, 255, 0.6); }
-        @media (max-width: 480px) { .container { width: 95vw; padding: 25px 15px; border-radius: 25px; margin: 5vh auto; } h1 { font-size: 28px; } .subtitle { font-size: 15px; letter-spacing: 3px; } .card, .sunshine-link { padding: 18px 22px; font-size: 17px; } .sunshine-link { margin-top: 20px; } .download-link { margin-top: 15px; } }
+        @media (max-width: 480px) { .container { width: 95vw; padding: 22px 15px; border-radius: 25px; margin: 5vh auto; } h1 { font-size: 28px; } .subtitle { font-size: 15px; letter-spacing: 3px; margin-bottom: 22px; } .card, .sunshine-link { padding: 15px 20px; font-size: 16px; } .sunshine-link { margin-top: 16px; } .download-link { margin-top: 12px; } }
+
+        .menu-btn {
+          position: fixed;
+          top: 18px;
+          left: 18px;
+          width: 26px;
+          height: 20px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          z-index: 9999;
+          padding: 0;
+        }
+        .menu-btn span {
+          display: block;
+          width: 100%;
+          height: 2px;
+          background: rgba(250, 246, 242, 0.67);
+          margin: 5px 0;
+          border-radius: 2px;
+          transition: background 0.2s;
+        }
+        .menu-btn:hover span {
+          background: rgba(252, 248, 244, 0.94);
+        }
+        .pop-menu {
+          position: fixed;
+          top: 51px;
+          left: 18px;
+          background: rgba(0, 0, 0, 0.945);
+          border: 1px solid rgba(182, 158, 132, 0.345);
+          border-radius: 14px;
+          padding: 8px 0;
+          min-width: 188px;
+          display: none;
+          flex-direction: column;
+          z-index: 8888;
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+        }
+        .pop-menu a {
+          display: block;
+          padding: 14px 22px;
+          color: rgba(249, 243, 237, 0.925);
+          text-decoration: none;
+          font-size: 16px;
+          letter-spacing: 1.5px;
+          text-align: left;
+          transition: background 0.18s;
+          border-bottom: 1px solid rgba(142, 121, 103, 0.198);
+        }
+        .pop-menu a:last-child {
+          border-bottom: none;
+        }
+        .pop-menu a:hover {
+          background: rgba(253, 245, 234, 0.062);
+          color: #fff;
+        }
+        .hide-old {
+          display: none !important;
+        }
     </style>
 </head>
 <body>
+    <button class="menu-btn" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="pop-menu" id="popMenu">
+      <a href="https://yuan5358.github.io/tupian/" target="_blank">历史背景</a>
+      <a href="https://yuan5358.github.io/Download" target="_blank">下载</a>
+      <a href="https://yuan5358.github.io/story" target="_blank">个人故事</a>
+    </div>
+
     <div class="snow-container" id="snow-container"></div>
     <div class="container">
         <div class="avatar-box">
             <img src="https://s41.ax1x.com/2026/02/18/pZOIyGT.png" alt="Avatar">
         </div>
         <h1>YUAN_E</h1>
-        <p class="subtitle">67676767676767kid</p>
+        <p class="subtitle">初中小孩 :)</p>
         <div class="links">
             <a href="https://discord.gg/FQM7ArvvR" target="_blank" class="card">
                 <svg class="discord-svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.14 96.36" width="28" height="28">
@@ -62,8 +134,8 @@
                 <i class="fab fa-youtube"></i><span>YouTube</span>
             </a>
         </div>
-        <a href="https://yuan5358.github.io/tupian/" target="_blank" class="sunshine-link">点一下</a>
-        <a href="https://yuan5358.github.io/Download" target="_blank" class="download-link">下载</a>
+        <a href="https://yuan5358.github.io/tupian/" target="_blank" class="sunshine-link hide-old">历史背景</a>
+        <a href="https://yuan5358.github.io/Download" target="_blank" class="download-link hide-old">下载</a>
     </div>
     <script>
         function createSnowflake() {
@@ -90,6 +162,16 @@
             setInterval(() => { createSnowflake(); }, 300);
         }
         window.addEventListener('load', createSnowflakes);
+
+        function toggleMenu() {
+          const menu = document.getElementById("popMenu");
+          menu.style.display = menu.style.display === "block" ? "none" : "block";
+        }
+        document.addEventListener("click", e => {
+          if (!e.target.closest(".menu-btn") && !e.target.closest("#popMenu")) {
+            document.getElementById("popMenu").style.display = "none";
+          }
+        });
     </script>
 </body>
 </html>
