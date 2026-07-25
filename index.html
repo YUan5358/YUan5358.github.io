@@ -3,87 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YUAN_E | Bio</title>
+    <title>wxhn</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { width: 100%; height: 100%; font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; color: white; overflow-x: hidden; overflow-y: auto; }
         body { background: #050505 url('https://s41.ax1x.com/2026/04/03/peYnzut.jpg') no-repeat center center fixed; background-size: cover; }
-        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); z-index: -1; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.55); z-index: -1; }
         .snow-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
         .snowflake { position: absolute; top: -10px; background: white; border-radius: 50%; opacity: 0.8; filter: blur(0.5px); }
         @keyframes fall { 0% { transform: translateY(-10px) translateX(0px) rotate(0deg); opacity: 0.8; } 100% { transform: translateY(calc(100vh + 10px)) translateX(calc(20px * var(--wind))) rotate(360deg); opacity: 0.2; } }
-        
-        .container { 
-          width: 420px; 
-          max-width: 92vw; 
-          min-height: 70vh; 
-          margin: 10vh auto; 
-          text-align: center; 
-          background: rgba(0, 0, 0, 0.85); 
-          border: 1px solid rgba(255, 255, 255, 0.2); 
-          border-radius: 30px; 
-          backdrop-filter: blur(15px); 
-          -webkit-backdrop-filter: blur(15px); 
-          padding: 30px 24px; 
-          box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9); 
-          display: flex; 
-          flex-direction: column; 
-          justify-content: center; 
-          position: relative; 
-          z-index: 2; 
+
+        .page {
+          position: relative;
+          z-index: 2;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 12vh 16px 6vh;
         }
-        
-        .avatar-box { width: 112px; height: 112px; border-radius: 32px; margin: 0 auto 18px; overflow: hidden; border: 2px solid rgba(255, 255, 255, 0.3); background: rgba(255, 255, 255, 0.1); display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
+
+        .avatar-box { width: 110px; height: 110px; border-radius: 30px; overflow: hidden; border: 2px solid rgba(255, 255, 255, 0.35); box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5); margin-bottom: 18px; }
         .avatar-box img { width: 100%; height: 100%; object-fit: cover; }
+
+        h1 { font-size: 34px; letter-spacing: 3px; font-weight: 600; text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6); margin-bottom: 6px; }
+        .subtitle { color: rgba(230, 230, 230, 0.8); font-size: 15px; letter-spacing: 4px; margin-bottom: 32px; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5); }
+
+        .links { display: flex; flex-direction: column; gap: 12px; width: 350px; max-width: 100%; }
         
-        h1 { font-size: 32px; margin: 10px 0 6px; letter-spacing: 3px; font-weight: 600; text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); }
-        .subtitle { color: #ccc; font-size: 16px; margin-bottom: 28px; letter-spacing: 5px; }
-        
-        .links { display: flex; flex-direction: column; gap: 10px; align-items: center; }
-        
-        .card { 
-          background: rgba(255, 255, 255, 0.08); 
-          border: 1px solid rgba(255, 255, 255, 0.15); 
-          width: 350px; 
-          max-width: 100%; 
-          padding: 16px 24px; 
-          border-radius: 16px; 
-          text-decoration: none; 
-          color: #fff; 
-          display: flex; 
-          align-items: center; 
-          font-size: 17px; 
-          font-weight: 500; 
-          transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
+        .card {
+          background: rgba(0, 0, 0, 0.45);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          padding: 15px 22px;
+          border-radius: 14px;
+          text-decoration: none;
+          color: #fff;
+          display: flex;
+          align-items: center;
+          font-size: 17px;
+          font-weight: 500;
+          transition: all 0.25s ease;
         }
-        .card:hover { transform: translateY(-4px); }
+        .card:hover { transform: translateY(-3px); background: rgba(0, 0, 0, 0.6); }
         .card i, .card svg { width: 26px; margin-right: 16px; font-size: 22px; display: flex; justify-content: center; flex-shrink: 0; }
         .card[href*="spotify"] { display: none; }
         .discord-svg-icon { fill: #5865F2; }
         .fa-steam { color: #66c0f4; }
         .fa-youtube { color: #ff0000; }
         .bilibili-icon { fill: #fb7299; }
-        
-        .sunshine-link { display: block; width: 350px; max-width: 100%; padding: 15px 28px; background: rgba(255, 215, 0, 0.15); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 16px; text-decoration: none; color: #FFD700; font-size: 17px; font-weight: 500; text-align: center; transition: all 0.3s ease; margin: 20px auto 0; }
-        .sunshine-link:hover { background: rgba(255, 215, 0, 0.3); transform: translateY(-3px); box-shadow: 0 10px 25px rgba(255, 215, 0, 0.2); }
-        
-        .download-link { display: block; margin-top: 15px; font-size: 12px; color: rgba(255, 255, 255, 0.3); text-decoration: none; text-align: center; transition: color 0.2s ease; }
-        .download-link:hover { color: rgba(255, 255, 255, 0.6); }
-        
-        @media (max-width: 520px) { 
-          .container { width: 370px; padding: 24px 18px; border-radius: 25px; margin: 5vh auto; } 
-          h1 { font-size: 26px; } 
-          .subtitle { font-size: 14px; letter-spacing: 3px; margin-bottom: 20px; } 
-          .card { width: 310px; padding: 14px 20px; font-size: 15px; } 
-          .sunshine-link { width: 310px; padding: 13px 20px; font-size: 15px; margin-top: 16px; } 
-          .download-link { margin-top: 12px; } 
+
+        .sunshine-link { display: block; width: 350px; max-width: 100%; padding: 14px 22px; background: rgba(255, 215, 0, 0.12); border: 1px solid rgba(255, 215, 0, 0.25); border-radius: 14px; text-decoration: none; color: #FFD700; font-size: 17px; font-weight: 500; text-align: center; transition: all 0.25s ease; margin: 20px auto 0; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+        .sunshine-link:hover { background: rgba(255, 215, 0, 0.22); transform: translateY(-2px); }
+
+        .download-link { display: block; margin-top: 14px; font-size: 12px; color: rgba(255, 255, 255, 0.25); text-decoration: none; text-align: center; transition: color 0.2s ease; }
+        .download-link:hover { color: rgba(255, 255, 255, 0.5); }
+
+        @media (max-width: 520px) {
+          .page { padding: 8vh 12px 4vh; }
+          h1 { font-size: 28px; }
+          .subtitle { font-size: 13px; letter-spacing: 3px; margin-bottom: 24px; }
+          .links { width: 310px; gap: 10px; }
+          .card { padding: 13px 18px; font-size: 15px; }
+          .sunshine-link { width: 310px; padding: 12px 18px; font-size: 15px; }
+          .avatar-box { width: 96px; height: 96px; border-radius: 26px; }
         }
 
+        /* menu */
         .menu-btn {
           position: fixed;
-          top: 18px;
-          left: 18px;
+          top: 16px;
+          left: 16px;
           width: 26px;
           height: 20px;
           background: none;
@@ -101,45 +92,36 @@
           border-radius: 2px;
           transition: background 0.2s;
         }
-        .menu-btn:hover span {
-          background: rgba(236, 227, 217, 0.895);
-        }
+        .menu-btn:hover span { background: rgba(236, 227, 217, 0.895); }
         .pop-menu {
           position: fixed;
-          top: 51px;
-          left: 18px;
-          background: rgba(0, 0, 0, 0.948);
-          border: 1px solid rgba(177, 153, 125, 0.322);
-          border-radius: 14px;
-          padding: 8px 0;
-          min-width: 192px;
+          top: 48px;
+          left: 16px;
+          background: rgba(0, 0, 0, 0.92);
+          border: 1px solid rgba(177, 153, 125, 0.32);
+          border-radius: 12px;
+          padding: 6px 0;
+          min-width: 180px;
           display: none;
           flex-direction: column;
           z-index: 8888;
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
         }
         .pop-menu a {
           display: block;
-          padding: 14px 22px;
-          color: rgba(246, 240, 233, 0.918);
+          padding: 12px 20px;
+          color: rgba(246, 240, 233, 0.9);
           text-decoration: none;
-          font-size: 16px;
-          letter-spacing: 1.5px;
+          font-size: 15px;
+          letter-spacing: 1px;
           text-align: left;
           transition: background 0.18s;
-          border-bottom: 1px solid rgba(139, 117, 98, 0.194);
+          border-bottom: 1px solid rgba(139, 117, 98, 0.18);
         }
-        .pop-menu a:last-child {
-          border-bottom: none;
-        }
-        .pop-menu a:hover {
-          background: rgba(250, 242, 232, 0.064);
-          color: #fff;
-        }
-        .hide-old {
-          display: none !important;
-        }
+        .pop-menu a:last-child { border-bottom: none; }
+        .pop-menu a:hover { background: rgba(250, 242, 232, 0.06); color: #fff; }
+        .hide-old { display: none !important; }
     </style>
 </head>
 <body>
@@ -155,12 +137,13 @@
     </div>
 
     <div class="snow-container" id="snow-container"></div>
-    <div class="container">
+
+    <div class="page">
         <div class="avatar-box">
             <img src="https://s41.ax1x.com/2026/02/18/pZOIyGT.png" alt="Avatar">
         </div>
         <h1>YUAN_E</h1>
-        <p class="subtitle">初中小孩 :)</p>
+        <p class="subtitle">超级小孩</p>
         <div class="links">
             <a href="https://discord.gg/d2PmCuJZhS" target="_blank" class="card">
                 <svg class="discord-svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.14 96.36" width="26" height="26">
@@ -184,6 +167,7 @@
         <a href="https://yuan5358.github.io/tupian/" target="_blank" class="sunshine-link hide-old">历史背景</a>
         <a href="https://yuan5358.github.io/Download" target="_blank" class="download-link hide-old">下载</a>
     </div>
+
     <script>
         function createSnowflake() {
             const snowflake = document.createElement('div');
