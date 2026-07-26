@@ -1,10 +1,122 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>施工中</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>走马灯了😂</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #fff;
+            color: #222;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.8;
+            font-size: 16px;
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            transition: background 0.2s, color 0.2s;
+        }
+        h1 {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 40px;
+            color: #111;
+        }
+        h2 {
+            font-size: 17px;
+            font-weight: 500;
+            margin-top: 36px;
+            margin-bottom: 12px;
+            color: #333;
+        }
+        p {
+            margin-bottom: 14px;
+        }
+        .section {
+            margin-bottom: 48px;
+        }
+        .note {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-size: 14px;
+            color: #888;
+        }
+
+        /* 暗色模式 */
+        body.dark {
+            background: #1a1a1a;
+            color: #e0e0e0;
+        }
+        body.dark h1 { color: #fff; }
+        body.dark h2 { color: #ccc; }
+        body.dark .note { border-top-color: #333; color: #666; }
+
+        /* 切换按钮 */
+        .toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 13px;
+            cursor: pointer;
+            color: #555;
+            transition: all 0.2s;
+        }
+        .toggle:hover {
+            background: #f5f5f5;
+        }
+        body.dark .toggle {
+            border-color: #444;
+            color: #aaa;
+        }
+        body.dark .toggle:hover {
+            background: #2a2a2a;
+        }
+    </style>
 </head>
-<body style="margin:0;display:flex;justify-content:center;align-items:center;height:100vh;font-size:80px;font-weight:bold;background:#f5f2eb;">
-    施工中
+<body>
+
+<button class="toggle" onclick="toggleDark()">🌙 暗色</button>
+
+<h1>该从哪里说起呢(走心?)</h1>
+
+<div class="section">
+    <h2>1.(1)我对互联网的初步认识</h2>
+    <p>我大概在幼儿园的时候就有了第一个可上网设备一台电脑 回想当时我爸爸在电脑桌面放了一个4399网页快捷方式 4399我印象最深的是《大便超人》(p2双人游戏现在不知道为什么搜不到了) 因为我姐姐很爱玩但我总是找理由支开 还有《The Henry Stickmin Collection》(现steam重制版名称 4399不知道怎么搜关键词)</p>
+    <p>当时henry stickmin不是一个综合游戏是分了很多游戏章节 我特意把所有章节找到了玩 对了我当时只会用4399玩游戏 不会从网上下任何应用😂</p>
+
+    <h2>(2)我看视频用的是爱奇艺 大概看的内容只要是</h2>
+    <p>大海的钻石大陆系列 和 时空小涵的minecraft植物大战僵尸</p>
+    <p>另一个很喜欢看的是 罗布乐思 博主:小飞象,面面，小格</p>
+</div>
+
+<div class="section">
+    <h2>2.2020-2022</h2>
+    <h2>(1)与朋友们最自由的时光 那时 我小区旁边有一个 小公园 那公园平时就我和几个朋友一起去</h2>
+    <p>我和几个人在小店铺 买了个打火机 跑到公园用手刨土刨了一个坑 然后找了几块石头搭上</p>
+    <p>在洞里扔几片枯叶枯枝 用火点燃 往里面放了块红薯进行烤 烤完分成果的时候 我成功没有分到一点😥(当时用手机拍了视频回来搬家手机消失了)</p>
+</div>
+
+<div class="note">
+    [下面要写的应该是上小学事发生的事情不想写了XD以后想写的时候写吧 (。_°)☆＼(- – ) 我没怎么在考试以外的时间写过这么长的东西语句肯定有点怪👽]
+</div>
+
+<script>
+    function toggleDark() {
+        document.body.classList.toggle('dark');
+        const btn = document.querySelector('.toggle');
+        btn.textContent = document.body.classList.contains('dark') ? '☀️ 亮色' : '🌙 暗色';
+    }
+</script>
+
 </body>
 </html>
