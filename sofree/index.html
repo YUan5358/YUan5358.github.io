@@ -1,25 +1,426 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>SoFree — 施工中</title>
-  <link rel="stylesheet" href="/sofree/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sofree</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rampart+One&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      overflow: hidden;
+      --bg-top: #ffffff;
+      --bg-bottom: #e8ecf1;
+      --bg-body: #f0f4f8;
+      --text-title: #222;
+      --text-main: #444;
+      --text-muted: #999;
+      --card-bg: #ffffff;
+      --card-shadow: rgba(0,0,0,0.08);
+      --dot-bg: #ccc;
+      --dot-active: #333;
+      --hint-color: #999;
+      transition: background 0.6s ease;
+      background: var(--bg-body);
+    }
+
+    body.dark {
+      --bg-top: #1a1a2e;
+      --bg-bottom: #16213e;
+      --bg-body: #0f3460;
+      --text-title: #eaeaea;
+      --text-main: #bbbbbb;
+      --text-muted: #666;
+      --card-bg: #1e2746;
+      --card-shadow: rgba(0,0,0,0.4);
+      --dot-bg: #555;
+      --dot-active: #eaeaea;
+      --hint-color: #666;
+    }
+
+    .container {
+      height: 200vh;
+      transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
+    }
+
+    section {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .top {
+      background: var(--bg-top);
+      transition: background 0.6s ease;
+    }
+
+    .top h1 {
+      font-family: "Rampart One", "Noto Sans SC", cursive;
+      font-size: clamp(64px, 14vw, 140px);
+      font-weight: 400;
+      letter-spacing: 4px;
+      color: var(--text-title);
+      transform: translateY(-80px);
+      opacity: 0;
+      animation: slideDown 1s ease-out forwards;
+      transition: color 0.6s ease;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.10);
+    }
+
+    body.dark .top h1 {
+      text-shadow: 0 4px 30px rgba(255,255,255,0.06);
+    }
+
+    .bottom {
+      background: var(--bg-bottom);
+      flex-direction: column;
+      text-align: center;
+      padding: 40px 20px;
+      transition: background 0.6s ease;
+    }
+
+    .intro {
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.9;
+      color: var(--text-main);
+      max-width: 600px;
+      margin-bottom: 24px;
+      transition: color 0.6s ease;
+    }
+
+    .config {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-main);
+      background: var(--card-bg);
+      padding: 18px 28px;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px var(--card-shadow);
+      line-height: 2;
+      transition: background 0.6s ease, box-shadow 0.6s ease, color 0.6s ease;
+    }
+
+    .config strong {
+      color: var(--text-title);
+      transition: color 0.6s ease;
+    }
+
+    .photo-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      margin: 20px 0;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.9s ease-out forwards;
+      animation-delay: 0.3s;
+    }
+
+    .band-photo {
+      width: 100%;
+      height: auto;
+      max-height: 32vh;
+      object-fit: cover;
+      border-radius: 14px;
+      box-shadow: 0 8px 28px var(--card-shadow);
+      display: block;
+      transition: box-shadow 0.6s ease;
+    }
+
+    .photo-wrapper::after {
+      content: "\1F4F7 2026.04.01";
+      position: absolute;
+      left: 14px;
+      bottom: 12px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.92);
+      background: rgba(0, 0, 0, 0.45);
+      padding: 4px 12px;
+      border-radius: 8px;
+      letter-spacing: 0.5px;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      pointer-events: none;
+      transition: background 0.4s ease;
+    }
+
+    body.dark .photo-wrapper::after {
+      background: rgba(0, 0, 0, 0.6);
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideDown {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .scroll-hint {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      color: var(--hint-color);
+      animation: fadeOut 0.6s ease forwards;
+      animation-delay: 3s;
+      z-index: 10;
+      pointer-events: none;
+      transition: color 0.6s ease;
+    }
+
+    .scroll-hint span {
+      display: inline-block;
+      animation: bounce 1.5s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; }
+    }
+
+    .page-dots {
+      position: fixed;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 10;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--dot-bg);
+      transition: background 0.4s, transform 0.4s;
+    }
+
+    .dot.active {
+      background: var(--dot-active);
+      transform: scale(1.3);
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--dot-bg);
+      background: var(--card-bg);
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 22px;
+      z-index: 100;
+      transition: background 0.4s ease, border-color 0.4s ease, transform 0.3s ease;
+      user-select: none;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    .theme-toggle:active {
+      transform: scale(0.95);
+    }
+
+    .theme-toggle .icon-sun,
+    .theme-toggle .icon-moon {
+      position: absolute;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    body:not(.dark) .theme-toggle .icon-moon {
+      opacity: 1;
+      transform: rotate(0deg);
+    }
+
+    body:not(.dark) .theme-toggle .icon-sun {
+      opacity: 0;
+      transform: rotate(-90deg);
+    }
+
+    body.dark .theme-toggle .icon-moon {
+      opacity: 0;
+      transform: rotate(90deg);
+    }
+
+    body.dark .theme-toggle .icon-sun {
+      opacity: 1;
+      transform: rotate(0deg);
+    }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <nav><a href="/">← 返回主页</a></nav>
-    <h1>SoFree</h1>
-    <p>施工中，请稍后回来查看。</p>
-  </header>
-  <main class="content">
-    <div class="card" style="text-align:center;padding:2.5rem">
-      <h2 style="font-size:1.75rem;margin-bottom:0.5rem">🚧 施工中</h2>
-      <p style="color:#374151;margin-bottom:1rem">本站正在建设中。我们正在更新内容与布局，预计很快就能上线。</p>
-      <p style="color:#6b7280;margin-bottom:1rem">有紧急问题请通过仓库 Issues 联系我。</p>
-      <a class="button" href="/">返回主页</a>
-    </div>
-  </main>
-  <footer>© 2026 YUan5358</footer>
+
+  <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+    <span class="icon-moon">&#x1F319;</span>
+    <span class="icon-sun">&#x2600;&#xFE0F;</span>
+  </button>
+
+  <div class="page-dots">
+    <div class="dot active" id="dot-0"></div>
+    <div class="dot" id="dot-1"></div>
+  </div>
+
+  <div class="scroll-hint" id="scrollHint">
+    <span>&darr; Scroll &darr;</span>
+  </div>
+
+  <div class="container" id="container">
+    <section class="top">
+      <h1>sofree</h1>
+    </section>
+
+    <section class="bottom">
+      <p class="intro">
+        这是一个由4名初中生因无聊创建的乐队<br />
+        <em>*不具备任何实用性*</em><br />
+        一般会在放假时一起约出去玩
+      </p>
+      <div class="photo-wrapper">
+        <img class="band-photo" src="https://s41.ax1x.com/2026/08/09/pmHoH9f.jpg" alt="sofree band photo" />
+      </div>
+      <div class="config">
+        <strong>乐队配置：</strong><br />
+        一假钢琴<br />
+        一把其它
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const container = document.getElementById('container');
+    const dot0 = document.getElementById('dot-0');
+    const dot1 = document.getElementById('dot-1');
+    const scrollHint = document.getElementById('scrollHint');
+    const themeToggle = document.getElementById('themeToggle');
+
+    let currentPage = 0;
+    let isAnimating = false;
+    const totalPages = 2;
+
+    // Load theme from localStorage
+    const savedTheme = localStorage.getItem('sofree-theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      const isDark = document.body.classList.contains('dark');
+      localStorage.setItem('sofree-theme', isDark ? 'dark' : 'light');
+    });
+
+    function goToPage(page) {
+      if (isAnimating || page < 0 || page >= totalPages) return;
+      isAnimating = true;
+      currentPage = page;
+
+      container.style.transition = 'transform 1.2s cubic-bezier(0.22, 1, 0.36, 1)';
+      container.style.transform = `translateY(-${page * 100}vh)`;
+
+      dot0.classList.toggle('active', page === 0);
+      dot1.classList.toggle('active', page === 1);
+
+      if (page === 1) {
+        scrollHint.style.display = 'none';
+      }
+
+      setTimeout(() => {
+        isAnimating = false;
+      }, 1200);
+    }
+
+    // Wheel event
+    let wheelTimeout = null;
+    window.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      if (isAnimating) return;
+      if (wheelTimeout) return;
+
+      if (e.deltaY > 30) {
+        goToPage(currentPage + 1);
+      } else if (e.deltaY < -30) {
+        goToPage(currentPage - 1);
+      }
+
+      wheelTimeout = setTimeout(() => {
+        wheelTimeout = null;
+      }, 50);
+    }, { passive: false });
+
+    // Touch events
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    window.addEventListener('touchstart', (e) => {
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+    }, { passive: false });
+
+    window.addEventListener('touchend', (e) => {
+      touchEndY = e.changedTouches[0].clientY;
+      const diff = touchStartY - touchEndY;
+
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          goToPage(currentPage + 1);
+        } else {
+          goToPage(currentPage - 1);
+        }
+      }
+    }, { passive: true });
+
+    // Keyboard support
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+        e.preventDefault();
+        goToPage(currentPage + 1);
+      } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+        e.preventDefault();
+        goToPage(currentPage - 1);
+      }
+    });
+  </script>
 </body>
 </html>
+
