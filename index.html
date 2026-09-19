@@ -123,6 +123,71 @@
         .pop-menu a:last-child { border-bottom: none; }
         .pop-menu a:hover { background: rgba(250, 242, 232, 0.06); color: #fff; }
         .hide-old { display: none !important; }
+
+        /* 简洁弹窗 */
+        .notice-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+        }
+        .notice-overlay.show {
+            visibility: visible;
+            opacity: 1;
+        }
+        .notice-box {
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 24px 24px 20px;
+            width: 90%;
+            max-width: 400px;
+            color: #e0e0e0;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+        .notice-box p {
+            margin-bottom: 10px;
+        }
+        .notice-box p:last-of-type {
+            margin-bottom: 0;
+        }
+        .notice-box a {
+            color: #7fc9ff;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        .notice-box a:hover {
+            text-decoration: underline;
+        }
+        .notice-btn {
+            display: block;
+            margin: 20px 0 0 auto;
+            padding: 8px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+            color: #e0e0e0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: background 0.2s;
+        }
+        .notice-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        @media (max-width: 520px) {
+            .notice-box {
+                padding: 20px 18px 16px;
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -169,7 +234,20 @@
         <a href="https://yuan5358.github.io/Download" target="_blank" class="download-link hide-old">下载</a>
     </div>
 
+    <!-- 简洁告知弹窗 -->
+    <div class="notice-overlay" id="noticeOverlay">
+        <div class="notice-box">
+            <p>本网站仅为我无聊创建</p>
+            <p>本人随时可能会关闭网站</p>
+            <p>我最近在重构我们学校的网站</p>
+            <p><a href="https://hetare.cc.cd/ycz/" target="_blank">https://hetare.cc.cd/ycz/</a></p>
+            <p>兴趣的可以点进看进度</p>
+            <button class="notice-btn" id="noticeCancelBtn">取消</button>
+        </div>
+    </div>
+
     <script>
+        // 雪花效果
         function createSnowflake() {
             const snowflake = document.createElement('div');
             snowflake.classList.add('snowflake');
@@ -195,6 +273,7 @@
         }
         window.addEventListener('load', createSnowflakes);
 
+        // 菜单
         function toggleMenu() {
           const menu = document.getElementById("popMenu");
           menu.style.display = menu.style.display === "block" ? "none" : "block";
@@ -204,6 +283,44 @@
             document.getElementById("popMenu").style.display = "none";
           }
         });
+
+        // 弹窗逻辑
+        (function() {
+            const overlay = document.getElementById('noticeOverlay');
+            const cancelBtn = document.getElementById('noticeCancelBtn');
+
+            function showNotice() {
+                requestAnimationFrame(() => {
+                    overlay.classList.add('show');
+                });
+            }
+
+            function closeNotice() {
+                overlay.classList.remove('show');
+            }
+
+            cancelBtn.addEventListener('click', closeNotice);
+
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) {
+                    closeNotice();
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && overlay.classList.contains('show')) {
+                    closeNotice();
+                }
+            });
+
+            window.addEventListener('load', function() {
+                setTimeout(showNotice, 200);
+            });
+
+            if (document.readyState === 'complete') {
+                setTimeout(showNotice, 200);
+            }
+        })();
     </script>
 </body>
 </html>
