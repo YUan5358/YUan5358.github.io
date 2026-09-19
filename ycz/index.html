@@ -1,17 +1,520 @@
-<!doctype html>
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>YCZ 分站 — 施工中</title>
-  <link rel="stylesheet" href="/ycz/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>施工🚧</title>
+    <!-- 使用柔和的字体与清新风格 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(145deg, #f3f7fc 0%, #eef2f7 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            color: #1e293b;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 主卡片 - 干净、圆润、有呼吸感 */
+        .announcement-card {
+            max-width: 960px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 20, 40, 0.25), 0 4px 12px 0 rgba(0, 0, 0, 0.05);
+            padding: 2.5rem 2.8rem;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(2px);
+        }
+
+        @media (max-width: 640px) {
+            .announcement-card {
+                padding: 1.8rem 1.5rem;
+                border-radius: 28px;
+            }
+        }
+
+        /* 校名 + 装饰标 */
+        .school-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .school-icon {
+            background: #2563eb;
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 500;
+            box-shadow: 0 8px 16px -6px rgba(37, 99, 235, 0.3);
+        }
+
+        .school-name {
+            font-size: 1.35rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #0f172a;
+        }
+
+        .school-name span {
+            font-weight: 300;
+            color: #3b82f6;
+            margin-left: 0.25rem;
+        }
+
+        /* 公告标题区域 */
+        .title-section {
+            border-left: 6px solid #2563eb;
+            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .title-section h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #0b1e3a;
+            line-height: 1.2;
+            margin-bottom: 0.25rem;
+        }
+
+        .title-section .subhead {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #4b6589;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: #e0f2fe;
+            color: #0369a1;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.2rem 0.8rem;
+            border-radius: 999px;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            display: inline-block;
+            border: 1px solid #b8e2ff;
+        }
+
+        /* 网格布局：项目编号 / 名称 */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem 1.5rem;
+            background: #f8fafd;
+            border-radius: 24px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2.25rem;
+            border: 1px solid #e9eef5;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .meta-label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #5e7a9a;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .meta-value {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #0b1e3a;
+            word-break: break-word;
+            background: #ffffff;
+            padding: 0.1rem 0;
+        }
+
+        .meta-value .number-highlight {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        /* 中标信息卡片 */
+        .winner-card {
+            background: #ffffff;
+            border-radius: 24px;
+            border: 1px solid #e9eef5;
+            padding: 0 1.8rem 1.8rem 1.8rem;
+            margin-bottom: 2.25rem;
+            box-shadow: 0 4px 12px -6px rgba(0, 0, 0, 0.05);
+        }
+
+        .winner-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 1.4rem 0 1rem 0;
+            border-bottom: 2px dashed #dbe7f5;
+            margin-bottom: 1.5rem;
+        }
+
+        .winner-header .icon {
+            font-size: 1.6rem;
+        }
+
+        .winner-header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #0b1e3a;
+            letter-spacing: -0.01em;
+        }
+
+        .winner-detail {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem 2rem;
+        }
+
+        @media (max-width: 560px) {
+            .winner-detail {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        .detail-block {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .detail-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #6886a6;
+            letter-spacing: 0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .detail-content {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: #0b1e3a;
+            background: #f6faff;
+            padding: 0.6rem 1rem;
+            border-radius: 16px;
+            border: 1px solid #deecfb;
+            word-break: break-word;
+        }
+
+        .detail-content.amount {
+            background: #eff6ff;
+            border-color: #b8d6fe;
+            color: #1e3a8a;
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: -0.01em;
+        }
+
+        .detail-content.amount small {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #2563eb;
+            margin-left: 0.5rem;
+        }
+
+        /* 主要标的信息区块 */
+        .goods-section {
+            background: #fbfdff;
+            border-radius: 24px;
+            border: 1px solid #e2edfb;
+            padding: 1.8rem;
+            margin-bottom: 2.25rem;
+        }
+
+        .goods-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0b1e3a;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .goods-title .pill {
+            background: #dbeafe;
+            color: #1d4ed8;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.8rem;
+            border-radius: 999px;
+            letter-spacing: 0.02em;
+        }
+
+        .goods-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .goods-table th {
+            text-align: left;
+            font-weight: 600;
+            color: #476485;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #d3e2f5;
+        }
+
+        .goods-table td {
+            padding: 1rem 0.2rem 0.6rem 0.2rem;
+            border-bottom: 1px solid #e9f0f9;
+            color: #1e2f44;
+            font-weight: 500;
+        }
+
+        .goods-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .goods-table .product-name {
+            font-weight: 600;
+            color: #0b1e3a;
+        }
+
+        .goods-table .price {
+            font-weight: 700;
+            color: #1e3a8a;
+            white-space: nowrap;
+        }
+
+        /* 评审专家 & 公告期限 双栏布局 */
+        .bottom-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem 2.5rem;
+            justify-content: space-between;
+            align-items: flex-start;
+            background: #f8fafd;
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            border: 1px solid #e9eef5;
+        }
+
+        .experts-list {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.4rem 1rem;
+        }
+
+        .experts-list .label {
+            font-weight: 500;
+            color: #5e7a9a;
+            font-size: 0.9rem;
+        }
+
+        .expert-name {
+            background: white;
+            padding: 0.2rem 0.9rem;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #1e3a8a;
+            border: 1px solid #cbdff7;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        }
+
+        .deadline {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: #1e3a8a;
+            font-weight: 500;
+            background: #ffffff;
+            padding: 0.4rem 1.2rem;
+            border-radius: 999px;
+            border: 1px solid #cbdff7;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+
+        .deadline .icon {
+            font-size: 1.1rem;
+        }
+
+        /* 装饰性小元素 */
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, #dbe7f5, transparent);
+            margin: 2rem 0 1.5rem;
+        }
+
+        /* 页脚细微标注 */
+        .footer-note {
+            margin-top: 1.8rem;
+            text-align: right;
+            font-size: 0.75rem;
+            color: #889db8;
+            letter-spacing: 0.02em;
+        }
+
+        /* 让所有小图标用emoji或unicode更简洁 */
+        .icon-emoji {
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.05));
+        }
+
+        a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        /* 鼠标悬浮微动 */
+        .winner-card:hover, .goods-section:hover {
+            border-color: #b8d6fe;
+            transition: border-color 0.2s;
+        }
+    </style>
 </head>
 <body>
-  <main class="container">
-    <h1>YCZ 分站</h1>
-    <p class="status">施工中 🚧</p>
-    <p class="note">该页面正在建设中。稍后会加入更多内容。</p>
-    <footer class="footer">— YCZ</footer>
-  </main>
+    <main class="announcement-card">
+        <!-- 学校标志/标题行 -->
+        <div class="school-header">
+            <div class="school-icon">苏</div>
+            <div class="school-name">苏州市第一初级中学校 <span>· 公告</span></div>
+        </div>
+
+        <!-- 主标题 -->
+        <div class="title-section">
+            <h1>校园广播系统中标公告</h1>
+            <div class="subhead">
+                <span class="badge">中标公示</span>
+                <span>项目编号：SZRQ2026-A-G-010</span>
+            </div>
+        </div>
+
+        <!-- 项目基本信息网格 -->
+        <div class="meta-grid">
+            <div class="meta-item">
+                <span class="meta-label">📋 项目编号</span>
+                <span class="meta-value">SZRQ2026-A-G-010</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">📌 项目名称</span>
+                <span class="meta-value">校园广播系统</span>
+            </div>
+        </div>
+
+        <!-- 中标供应商卡片 -->
+        <div class="winner-card">
+            <div class="winner-header">
+                <span class="icon">🏆</span>
+                <h2>中标信息</h2>
+            </div>
+            <div class="winner-detail">
+                <div class="detail-block">
+                    <span class="detail-label">🏢 供应商名称</span>
+                    <div class="detail-content">江苏创海信息科技有限公司</div>
+                </div>
+                <div class="detail-block">
+                    <span class="detail-label">📍 供应商地址</span>
+                    <div class="detail-content">苏州市十全街吏舍弄10号9号楼201.202</div>
+                </div>
+                <div class="detail-block" style="grid-column: 1 / -1;">
+                    <span class="detail-label">💰 中标金额</span>
+                    <div class="detail-content amount">
+                        贰拾肆万捌仟伍佰元整
+                        <small>￥248,500.00</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 主要标的信息 -->
+        <div class="goods-section">
+            <div class="goods-title">
+                <span>📦 主要标的信息</span>
+                <span class="pill">货物类</span>
+            </div>
+            <table class="goods-table">
+                <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>品牌</th>
+                        <th>规格型号</th>
+                        <th>数量</th>
+                        <th>单价</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="product-name">控制主机</td>
+                        <td>CRX</td>
+                        <td>CT-1400</td>
+                        <td>1台</td>
+                        <td class="price">¥25,070.00</td>
+                    </tr>
+                    <!-- 公告中仅展示了控制主机一项，其余可以留作扩展，但保持真实原始数据 -->
+                </tbody>
+            </table>
+            <!-- 加一点注释表示仅展示部分，但公告中只列了一项主要标的 -->
+            <div style="margin-top: 0.9rem; font-size: 0.8rem; color: #7b94b0; display: flex; gap: 0.5rem; align-items: center; border-top: 1px dashed #dbe7f5; padding-top: 0.9rem;">
+                <span>ℹ️ 公告内主要标的仅公示控制主机一项，其他明细可查阅完整文件。</span>
+            </div>
+        </div>
+
+        <!-- 评审专家 + 公告期限 组合 -->
+        <div class="bottom-info">
+            <div class="experts-list">
+                <span class="label">👥 评审专家：</span>
+                <span class="expert-name">王宇翔</span>
+                <span class="expert-name">张舒</span>
+                <span class="expert-name">谢伟</span>
+                <span class="expert-name">夏营</span>
+                <span class="expert-name">吴约进</span>
+            </div>
+            <div class="deadline">
+                <span class="icon">⏳</span> 公告期限：自本公告发布之日起1个工作日
+            </div>
+        </div>
+
+        <!-- 底部轻微留白与来源 -->
+        <div class="footer-note">
+            苏州市第一初级中学校 · 官方公告
+        </div>
+    </main>
 </body>
 </html>
