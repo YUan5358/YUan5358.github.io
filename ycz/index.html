@@ -1,520 +1,804 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>施工🚧</title>
-    <!-- 使用柔和的字体与清新风格 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>苏州市第一初级中学校</title>
+<style>
+/* ========== 基础 ========== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(145deg, #f3f7fc 0%, #eef2f7 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem 1.5rem;
-            color: #1e293b;
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-        }
+:root {
+  --washi:    #f5f3ee;
+  --washi-2:  #ebe7dd;
+  --sumi:     #1a1a1a;
+  --sumi-2:   #3d3d3d;
+  --koke:     #6b7a5a;
+  --koke-dark:#4a5740;
+  --shu:      #b84a32;
+  --line:     #d4cfc4;
+  --line-thin:#e0dcd1;
+}
 
-        /* 主卡片 - 干净、圆润、有呼吸感 */
-        .announcement-card {
-            max-width: 960px;
-            width: 100%;
-            background: #ffffff;
-            border-radius: 40px;
-            box-shadow: 0 25px 50px -12px rgba(0, 20, 40, 0.25), 0 4px 12px 0 rgba(0, 0, 0, 0.05);
-            padding: 2.5rem 2.8rem;
-            transition: all 0.2s ease;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(2px);
-        }
+html { scroll-behavior: smooth; }
 
-        @media (max-width: 640px) {
-            .announcement-card {
-                padding: 1.8rem 1.5rem;
-                border-radius: 28px;
-            }
-        }
+body {
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", "Source Han Serif SC", "Noto Serif CJK SC", "SimSun", serif;
+  background: var(--washi);
+  color: var(--sumi);
+  line-height: 1.8;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
 
-        /* 校名 + 装饰标 */
-        .school-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1.75rem;
-        }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
 
-        .school-icon {
-            background: #2563eb;
-            color: white;
-            width: 44px;
-            height: 44px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 500;
-            box-shadow: 0 8px 16px -6px rgba(37, 99, 235, 0.3);
-        }
+/* ========== 和纸纹理 overlay ========== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
 
-        .school-name {
-            font-size: 1.35rem;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            color: #0f172a;
-        }
+/* ========== 顶部 ========== */
+.topbar {
+  background: var(--sumi);
+  color: #ccc;
+  font-size: 11px;
+  padding: 6px 0;
+  text-align: center;
+  letter-spacing: 2px;
+}
 
-        .school-name span {
-            font-weight: 300;
-            color: #3b82f6;
-            margin-left: 0.25rem;
-        }
+header {
+  border-bottom: 1px solid var(--line);
+  background: var(--washi);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 
-        /* 公告标题区域 */
-        .title-section {
-            border-left: 6px solid #2563eb;
-            padding-left: 1.5rem;
-            margin-bottom: 2rem;
-        }
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 22px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-        .title-section h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            color: #0b1e3a;
-            line-height: 1.2;
-            margin-bottom: 0.25rem;
-        }
+.school-brand h1 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  line-height: 1.3;
+}
 
-        .title-section .subhead {
-            font-size: 1rem;
-            font-weight: 400;
-            color: #4b6589;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
+.school-brand .sub {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--sumi-2);
+  margin-top: 2px;
+}
 
-        .badge {
-            background: #e0f2fe;
-            color: #0369a1;
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 0.2rem 0.8rem;
-            border-radius: 999px;
-            letter-spacing: 0.02em;
-            text-transform: uppercase;
-            display: inline-block;
-            border: 1px solid #b8e2ff;
-        }
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 0;
+}
 
-        /* 网格布局：项目编号 / 名称 */
-        .meta-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.25rem 1.5rem;
-            background: #f8fafd;
-            border-radius: 24px;
-            padding: 1.5rem 2rem;
-            margin-bottom: 2.25rem;
-            border: 1px solid #e9eef5;
-        }
+nav li a {
+  display: block;
+  padding: 10px 16px;
+  font-size: 13px;
+  letter-spacing: 2px;
+  transition: color .25s;
+  position: relative;
+}
 
-        .meta-item {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
+nav li a:hover { color: var(--koke); }
 
-        .meta-label {
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: #5e7a9a;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
+nav li a::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 60%;
+  height: 1px;
+  background: var(--koke);
+  transition: transform .3s;
+}
 
-        .meta-value {
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: #0b1e3a;
-            word-break: break-word;
-            background: #ffffff;
-            padding: 0.1rem 0;
-        }
+nav li a:hover::after { transform: translateX(-50%) scaleX(1); }
 
-        .meta-value .number-highlight {
-            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 700;
-        }
+/* ========== 首屏 ========== */
+.hero {
+  position: relative;
+  height: 520px;
+  overflow: hidden;
+}
 
-        /* 中标信息卡片 */
-        .winner-card {
-            background: #ffffff;
-            border-radius: 24px;
-            border: 1px solid #e9eef5;
-            padding: 0 1.8rem 1.8rem 1.8rem;
-            margin-bottom: 2.25rem;
-            box-shadow: 0 4px 12px -6px rgba(0, 0, 0, 0.05);
-        }
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(.55) contrast(1.1) saturate(.7) sepia(.1);
+}
 
-        .winner-header {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 1.4rem 0 1rem 0;
-            border-bottom: 2px dashed #dbe7f5;
-            margin-bottom: 1.5rem;
-        }
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,.6) 100%);
+}
 
-        .winner-header .icon {
-            font-size: 1.6rem;
-        }
+.hero-content {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #f0ece1;
+}
 
-        .winner-header h2 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #0b1e3a;
-            letter-spacing: -0.01em;
-        }
+.hero-content .stamp {
+  display: inline-block;
+  border: 2px solid var(--shu);
+  color: var(--shu);
+  font-size: 11px;
+  padding: 3px 14px;
+  letter-spacing: 4px;
+  margin-bottom: 18px;
+  background: rgba(0,0,0,.35);
+}
 
-        .winner-detail {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem 2rem;
-        }
+.hero-content h2 {
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: 8px;
+  line-height: 1.6;
+  text-shadow: 0 2px 12px rgba(0,0,0,.4);
+}
 
-        @media (max-width: 560px) {
-            .winner-detail {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-        }
+.hero-content p {
+  margin-top: 14px;
+  font-size: 13px;
+  letter-spacing: 3px;
+  opacity: .85;
+}
 
-        .detail-block {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
+/* ========== 竖排引言 ========== */
+.quote-bar {
+  background: var(--washi-2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 28px 0;
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+}
 
-        .detail-label {
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: #6886a6;
-            letter-spacing: 0.02em;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
+.quote-bar .item {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 14px;
+  letter-spacing: 4px;
+  line-height: 2;
+  color: var(--sumi-2);
+  height: 120px;
+}
 
-        .detail-content {
-            font-size: 1.05rem;
-            font-weight: 500;
-            color: #0b1e3a;
-            background: #f6faff;
-            padding: 0.6rem 1rem;
-            border-radius: 16px;
-            border: 1px solid #deecfb;
-            word-break: break-word;
-        }
+.quote-bar .item .kan {
+  color: var(--koke);
+  font-size: 16px;
+}
 
-        .detail-content.amount {
-            background: #eff6ff;
-            border-color: #b8d6fe;
-            color: #1e3a8a;
-            font-weight: 700;
-            font-size: 1.25rem;
-            letter-spacing: -0.01em;
-        }
+/* ========== 通用容器 ========== */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
 
-        .detail-content.amount small {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #2563eb;
-            margin-left: 0.5rem;
-        }
+/* ========== 区块标题 ========== */
+.section {
+  padding: 72px 0;
+}
 
-        /* 主要标的信息区块 */
-        .goods-section {
-            background: #fbfdff;
-            border-radius: 24px;
-            border: 1px solid #e2edfb;
-            padding: 1.8rem;
-            margin-bottom: 2.25rem;
-        }
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
 
-        .goods-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #0b1e3a;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
+.section-head h3 {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 5px;
+}
 
-        .goods-title .pill {
-            background: #dbeafe;
-            color: #1d4ed8;
-            font-size: 0.7rem;
-            font-weight: 600;
-            padding: 0.2rem 0.8rem;
-            border-radius: 999px;
-            letter-spacing: 0.02em;
-        }
+.section-head h3 .en {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--koke);
+  font-family: "Courier New", monospace;
+  margin-bottom: 4px;
+}
 
-        .goods-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.95rem;
-        }
+.section-head .more {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--sumi-2);
+  border: 1px solid var(--line);
+  padding: 4px 14px;
+  transition: all .25s;
+}
 
-        .goods-table th {
-            text-align: left;
-            font-weight: 600;
-            color: #476485;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            padding-bottom: 0.75rem;
-            border-bottom: 1px solid #d3e2f5;
-        }
+.section-head .more:hover {
+  border-color: var(--koke);
+  color: var(--koke);
+}
 
-        .goods-table td {
-            padding: 1rem 0.2rem 0.6rem 0.2rem;
-            border-bottom: 1px solid #e9f0f9;
-            color: #1e2f44;
-            font-weight: 500;
-        }
+/* ========== 学校名片三栏 ========== */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--line);
+}
 
-        .goods-table tr:last-child td {
-            border-bottom: none;
-        }
+.about-cell {
+  padding: 36px 28px;
+  border-right: 1px solid var(--line);
+  position: relative;
+}
 
-        .goods-table .product-name {
-            font-weight: 600;
-            color: #0b1e3a;
-        }
+.about-cell:last-child { border-right: none; }
 
-        .goods-table .price {
-            font-weight: 700;
-            color: #1e3a8a;
-            white-space: nowrap;
-        }
+.about-cell .num {
+  font-size: 11px;
+  color: var(--koke);
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  font-family: "Courier New", monospace;
+}
 
-        /* 评审专家 & 公告期限 双栏布局 */
-        .bottom-info {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem 2.5rem;
-            justify-content: space-between;
-            align-items: flex-start;
-            background: #f8fafd;
-            border-radius: 20px;
-            padding: 1.5rem 2rem;
-            border: 1px solid #e9eef5;
-        }
+.about-cell h4 {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
 
-        .experts-list {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 0.4rem 1rem;
-        }
+.about-cell p {
+  font-size: 13px;
+  color: var(--sumi-2);
+  line-height: 2;
+}
 
-        .experts-list .label {
-            font-weight: 500;
-            color: #5e7a9a;
-            font-size: 0.9rem;
-        }
+.about-cell .cell-img {
+  margin-top: 18px;
+  height: 140px;
+  overflow: hidden;
+}
 
-        .expert-name {
-            background: white;
-            padding: 0.2rem 0.9rem;
-            border-radius: 999px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #1e3a8a;
-            border: 1px solid #cbdff7;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
-        }
+.about-cell .cell-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(.15) contrast(1.05);
+  transition: transform .6s;
+}
 
-        .deadline {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            color: #1e3a8a;
-            font-weight: 500;
-            background: #ffffff;
-            padding: 0.4rem 1.2rem;
-            border-radius: 999px;
-            border: 1px solid #cbdff7;
-            font-size: 0.95rem;
-            white-space: nowrap;
-        }
+.about-cell:hover .cell-img img { transform: scale(1.04); }
 
-        .deadline .icon {
-            font-size: 1.1rem;
-        }
+/* ========== 通知 + 新闻 双栏 ========== */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
 
-        /* 装饰性小元素 */
-        .divider {
-            height: 1px;
-            background: linear-gradient(to right, #dbe7f5, transparent);
-            margin: 2rem 0 1.5rem;
-        }
+.list-item {
+  display: flex;
+  align-items: baseline;
+  padding: 13px 0;
+  border-bottom: 1px dashed var(--line-thin);
+  gap: 14px;
+}
 
-        /* 页脚细微标注 */
-        .footer-note {
-            margin-top: 1.8rem;
-            text-align: right;
-            font-size: 0.75rem;
-            color: #889db8;
-            letter-spacing: 0.02em;
-        }
+.list-item .date {
+  font-size: 11px;
+  color: var(--koke);
+  letter-spacing: 1px;
+  font-family: "Courier New", monospace;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
 
-        /* 让所有小图标用emoji或unicode更简洁 */
-        .icon-emoji {
-            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.05));
-        }
+.list-item a {
+  font-size: 13px;
+  transition: color .2s;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
-        a {
-            color: #2563eb;
-            text-decoration: none;
-        }
+.list-item a:hover { color: var(--koke); }
 
-        /* 鼠标悬浮微动 */
-        .winner-card:hover, .goods-section:hover {
-            border-color: #b8d6fe;
-            transition: border-color 0.2s;
-        }
-    </style>
+.list-item .tag {
+  font-size: 10px;
+  border: 1px solid var(--line);
+  padding: 1px 6px;
+  color: var(--sumi-2);
+  flex-shrink: 0;
+}
+
+/* ========== 图片横幅 ========== */
+.image-banner {
+  margin: 0;
+  height: 240px;
+  overflow: hidden;
+  position: relative;
+}
+
+.image-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(.7) sepia(.1);
+}
+
+.image-banner .banner-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #f0ece1;
+  text-align: center;
+}
+
+.image-banner .banner-text h3 {
+  font-size: 22px;
+  letter-spacing: 8px;
+  font-weight: 400;
+}
+
+.image-banner .banner-text p {
+  margin-top: 8px;
+  font-size: 12px;
+  letter-spacing: 4px;
+  opacity: .8;
+}
+
+/* ========== 特色课程网格 ========== */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.feature-item {
+  background: var(--washi);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-item .fi-img {
+  height: 130px;
+  overflow: hidden;
+}
+
+.feature-item .fi-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(.1) contrast(1.05);
+  transition: transform .5s;
+}
+
+.feature-item:hover .fi-img img { transform: scale(1.06); }
+
+.feature-item .fi-body {
+  padding: 18px 16px;
+}
+
+.feature-item .fi-body h5 {
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.feature-item .fi-body p {
+  font-size: 11px;
+  color: var(--sumi-2);
+  line-height: 1.8;
+}
+
+/* ========== 数据栏 ========== */
+.stats-bar {
+  background: var(--sumi);
+  color: #c8c4b8;
+  padding: 48px 0;
+}
+
+.stats-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  text-align: center;
+}
+
+.stat-item .stat-num {
+  font-size: 36px;
+  font-weight: 300;
+  color: #d4cfc4;
+  font-family: "Courier New", monospace;
+  letter-spacing: 2px;
+}
+
+.stat-item .stat-label {
+  margin-top: 6px;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: #888;
+}
+
+/* ========== 页脚 ========== */
+footer {
+  background: #1a1a1a;
+  color: #777;
+  padding: 52px 0 24px;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+}
+
+.footer-col h5 {
+  color: #b0aba0;
+  font-size: 13px;
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.footer-col p, .footer-col a {
+  font-size: 12px;
+  line-height: 2.2;
+  color: #666;
+  display: block;
+}
+
+.footer-col a:hover { color: #999; }
+
+.footer-col .seal {
+  width: 52px;
+  height: 52px;
+  border: 2px solid var(--shu);
+  color: var(--shu);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  letter-spacing: 2px;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  margin-bottom: 16px;
+}
+
+.footer-bottom {
+  max-width: 1100px;
+  margin: 32px auto 0;
+  padding: 20px 32px 0;
+  border-top: 1px solid #333;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #555;
+}
+
+/* ========== 淡入 ========== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .8s ease, transform .8s ease;
+}
+
+.fade-up.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== 响应式 ========== */
+@media (max-width: 768px) {
+  .header-inner { flex-direction: column; gap: 14px; padding: 16px; }
+  nav ul { flex-wrap: wrap; justify-content: center; }
+  .hero { height: 340px; }
+  .hero-content h2 { font-size: 20px; letter-spacing: 4px; }
+  .quote-bar { gap: 24px; }
+  .quote-bar .item { font-size: 12px; height: 90px; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-cell { border-right: none; border-bottom: 1px solid var(--line); }
+  .two-col { grid-template-columns: 1fr; gap: 32px; }
+  .feature-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  .footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; }
+  .section { padding: 48px 0; }
+}
+</style>
 </head>
 <body>
-    <main class="announcement-card">
-        <!-- 学校标志/标题行 -->
-        <div class="school-header">
-            <div class="school-icon">苏</div>
-            <div class="school-name">苏州市第一初级中学校 <span>· 公告</span></div>
-        </div>
 
-        <!-- 主标题 -->
-        <div class="title-section">
-            <h1>校园广播系统中标公告</h1>
-            <div class="subhead">
-                <span class="badge">中标公示</span>
-                <span>项目编号：SZRQ2026-A-G-010</span>
-            </div>
-        </div>
+<!-- 顶部信息条 -->
+<div class="topbar">苏州市教育局直属公办初中　|　临顿路南显子巷18号　|　0512-67276024</div>
 
-        <!-- 项目基本信息网格 -->
-        <div class="meta-grid">
-            <div class="meta-item">
-                <span class="meta-label">📋 项目编号</span>
-                <span class="meta-value">SZRQ2026-A-G-010</span>
-            </div>
-            <div class="meta-item">
-                <span class="meta-label">📌 项目名称</span>
-                <span class="meta-value">校园广播系统</span>
-            </div>
-        </div>
+<!-- 页头 -->
+<header>
+  <div class="header-inner">
+    <div class="school-brand">
+      <h1>苏州市第一初级中学校</h1>
+      <div class="sub">SUZHOU NO.1 JUNIOR MIDDLE SCHOOL</div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#">首页</a></li>
+        <li><a href="#">学校概况</a></li>
+        <li><a href="#">校史与惠荫园</a></li>
+        <li><a href="#">教学与课程</a></li>
+        <li><a href="#">师资队伍</a></li>
+        <li><a href="#">招生入学</a></li>
+        <li><a href="#">校园生活</a></li>
+        <li><a href="#">通知公告</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-        <!-- 中标供应商卡片 -->
-        <div class="winner-card">
-            <div class="winner-header">
-                <span class="icon">🏆</span>
-                <h2>中标信息</h2>
-            </div>
-            <div class="winner-detail">
-                <div class="detail-block">
-                    <span class="detail-label">🏢 供应商名称</span>
-                    <div class="detail-content">江苏创海信息科技有限公司</div>
-                </div>
-                <div class="detail-block">
-                    <span class="detail-label">📍 供应商地址</span>
-                    <div class="detail-content">苏州市十全街吏舍弄10号9号楼201.202</div>
-                </div>
-                <div class="detail-block" style="grid-column: 1 / -1;">
-                    <span class="detail-label">💰 中标金额</span>
-                    <div class="detail-content amount">
-                        贰拾肆万捌仟伍佰元整
-                        <small>￥248,500.00</small>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- 首屏 -->
+<section class="hero">
+  <img src="https://images.unsplash.com/photo-1572880262561-64405c7b9c1e?w=1600&q=80" alt="园林">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="stamp">清真雅正</div>
+    <h2>园子有五百年，课是现在的课</h2>
+    <p>惠荫园畔 · 临顿路南显子巷18号 · 明嘉靖至今</p>
+  </div>
+</section>
 
-        <!-- 主要标的信息 -->
-        <div class="goods-section">
-            <div class="goods-title">
-                <span>📦 主要标的信息</span>
-                <span class="pill">货物类</span>
-            </div>
-            <table class="goods-table">
-                <thead>
-                    <tr>
-                        <th>名称</th>
-                        <th>品牌</th>
-                        <th>规格型号</th>
-                        <th>数量</th>
-                        <th>单价</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="product-name">控制主机</td>
-                        <td>CRX</td>
-                        <td>CT-1400</td>
-                        <td>1台</td>
-                        <td class="price">¥25,070.00</td>
-                    </tr>
-                    <!-- 公告中仅展示了控制主机一项，其余可以留作扩展，但保持真实原始数据 -->
-                </tbody>
-            </table>
-            <!-- 加一点注释表示仅展示部分，但公告中只列了一项主要标的 -->
-            <div style="margin-top: 0.9rem; font-size: 0.8rem; color: #7b94b0; display: flex; gap: 0.5rem; align-items: center; border-top: 1px dashed #dbe7f5; padding-top: 0.9rem;">
-                <span>ℹ️ 公告内主要标的仅公示控制主机一项，其他明细可查阅完整文件。</span>
-            </div>
-        </div>
+<!-- 竖排引言 -->
+<div class="quote-bar">
+  <div class="item"><span class="kan">务本</span>立信，崇德修学</div>
+  <div class="item"><span class="kan">修德</span>睦友，明智健体</div>
+  <div class="item"><span class="kan">惠泽</span>学子，博洽多闻</div>
+  <div class="item"><span class="kan">让每一位学生</span>获得成功</div>
+</div>
 
-        <!-- 评审专家 + 公告期限 组合 -->
-        <div class="bottom-info">
-            <div class="experts-list">
-                <span class="label">👥 评审专家：</span>
-                <span class="expert-name">王宇翔</span>
-                <span class="expert-name">张舒</span>
-                <span class="expert-name">谢伟</span>
-                <span class="expert-name">夏营</span>
-                <span class="expert-name">吴约进</span>
-            </div>
-            <div class="deadline">
-                <span class="icon">⏳</span> 公告期限：自本公告发布之日起1个工作日
-            </div>
+<!-- 学校名片 -->
+<section class="section">
+  <div class="container">
+    <div class="section-head fade-up">
+      <h3><span class="en">ABOUT</span>学校概况</h3>
+      <a href="#" class="more">更 多 →</a>
+    </div>
+    <div class="about-grid fade-up">
+      <div class="about-cell">
+        <div class="num">— 01 —</div>
+        <h4>老校址，老园子</h4>
+        <p>明嘉靖年间洽隐园，清同治安徽会馆，李鸿章题"惠荫园"。五百年园林与公立初中同处一巷。</p>
+        <div class="cell-img">
+          <img src="https://images.unsplash.com/photo-1627389955641-2c12f35a4e6d?w=600&q=80" alt="园林建筑">
         </div>
+      </div>
+      <div class="about-cell">
+        <div class="num">— 02 —</div>
+        <h4>81位老师，79%中高级</h4>
+        <p>专职教师81人，中高级职称占比约79%，大市及市区学科带头人16名。早上七点半在校门口的，是真人。</p>
+        <div class="cell-img">
+          <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80" alt="教师">
+        </div>
+      </div>
+      <div class="about-cell">
+        <div class="num">— 03 —</div>
+        <h4>30多门课，不是只有语数英</h4>
+        <p>国画、书法、篆刻、人工智能、攀岩、科学探究。周里总有两节不像上课的课。</p>
+        <div class="cell-img">
+          <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=600&q=80" alt="书法">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <!-- 底部轻微留白与来源 -->
-        <div class="footer-note">
-            苏州市第一初级中学校 · 官方公告
-        </div>
-    </main>
+<!-- 通知 + 新闻 -->
+<section class="section" style="background: var(--washi-2);">
+  <div class="container">
+    <div class="section-head fade-up">
+      <h3><span class="en">NOTICE &amp; NEWS</span>通知公告 · 校园新闻</h3>
+    </div>
+    <div class="two-col fade-up">
+      <div>
+        <div class="list-item"><span class="date">2026-08-14</span><span class="tag">公示</span><a href="#">校园安保服务采购结果公示</a></div>
+        <div class="list-item"><span class="date">2026-08-03</span><span class="tag">公告</span><a href="#">校园安保服务竞争性磋商公告</a></div>
+        <div class="list-item"><span class="date">2026-07-13</span><span class="tag">结果</span><a href="#">校园广播系统中标公告</a></div>
+        <div class="list-item"><span class="date">2025-12-19</span><span class="tag">结果</span><a href="#">校服项目中标结果公告</a></div>
+        <div class="list-item"><span class="date">2025-11-08</span><span class="tag">公示</span><a href="#">2025年度学校预算执行情况公示</a></div>
+        <div class="list-item"><span class="date">2025-09-02</span><span class="tag">通知</span><a href="#">2025年秋季学期开学工作安排</a></div>
+        <div class="list-item"><span class="date">2025-06-20</span><span class="tag">公告</span><a href="#">2025年初中学业水平考试考点设置公告</a></div>
+      </div>
+      <div>
+        <div class="list-item"><span class="date">2026-09-10</span><span class="tag">校园</span><a href="#">第42个教师节：惠荫园里的谢师礼</a></div>
+        <div class="list-item"><span class="date">2026-09-01</span><span class="tag">新闻</span><a href="#">开学第一天：老巷子里的新面孔</a></div>
+        <div class="list-item"><span class="date">2026-06-15</span><span class="tag">活动</span><a href="#">"希望之星"攀岩社团获市赛团体第二</a></div>
+        <div class="list-item"><span class="date">2026-05-22</span><span class="tag">教研</span><a href="#">我校3位教师获评2026年市区学科带头人</a></div>
+        <div class="list-item"><span class="date">2026-04-08</span><span class="tag">活动</span><a href="#">清明：学生自己讲校史，程公祠里上了堂课</a></div>
+        <div class="list-item"><span class="date">2026-03-12</span><span class="tag">课程</span><a href="#">春季综合实践课启动：从惠荫园到平江路</a></div>
+        <div class="list-item"><span class="date">2025-12-30</span><span class="tag">校园</span><a href="#">元旦书画展：学生篆刻作品首次展出</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 图片横幅 -->
+<div class="image-banner">
+  <img src="https://images.unsplash.com/photo-1545569310-6d4f8dbfa4bb?w=1600&q=80" alt="苏州园林">
+  <div class="banner-text">
+    <h3>惠荫园 · 五百年的课桌上</h3>
+    <p>洽隐园 — 安徽会馆 — 程公祠 — 今天的一初中</p>
+  </div>
+</div>
+
+<!-- 特色课程 -->
+<section class="section">
+  <div class="container">
+    <div class="section-head fade-up">
+      <h3><span class="en">CURRICULUM</span>课程与社团</h3>
+      <a href="#" class="more">更 多 →</a>
+    </div>
+    <div class="feature-grid fade-up">
+      <div class="feature-item">
+        <div class="fi-img"><img src="https://images.unsplash.com/photo-1475666188225-1f4a0d87c0a8?w=400&q=80" alt="国画"></div>
+        <div class="fi-body"><h5>国画与书法</h5><p>每周一节，从握笔开始。不是为了参赛，是让手慢下来。</p></div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-img"><img src="https://images.unsplash.com/photo-1574169208507-84376144848b?w=400&q=80" alt="篆刻"></div>
+        <div class="fi-body"><h5>篆刻</h5><p>青田石、刻刀、印泥。一方印，磨的是性子。</p></div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-img"><img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&q=80" alt="科学"></div>
+        <div class="fi-body"><h5>科学探究</h5><p>显微镜、标本、实验报告。不是背结论，是自己动手验证。</p></div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-img"><img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?w=400&q=80" alt="攀岩"></div>
+        <div class="fi-body"><h5>攀岩 · 户外运动</h5><p>"希望之星"社团，苏州市首届十佳社团。不敢上？老师陪你再试一次。</p></div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-img"><img src="https://images.unsplash.com/photo-1531747118685-ca8fa6e08806?w=400&q=80" alt="人工智能"></div>
+        <div class="fi-body"><h5>人工智能</h5><p>编程、传感器、简单模型。初中阶段接触一点，不神化也不回避。</p></div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-img"><img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&q=80" alt="阅读"></div>
+        <div class="fi-body"><h5>古城研学</h5><p>走出校门，平江路、拙政园、博物馆。苏州本身就是教材。</p></div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-img"><img src="https://images.unsplash.com/photo-1513475382585-d06e58dc9f6d?w=400&q=80" alt="音乐"></div>
+        <div class="fi-body"><h5>民乐与戏曲</h5><p>评弹、昆曲进校园。听得懂听，听不懂先坐着感受。</p></div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-img"><img src="https://images.unsplash.com/photo-1588072432836-e10032774350?w=400&q=80" alt="体育"></div>
+        <div class="fi-body"><h5>体育与健康</h5><p>每天一节体育课，不是口号。体质测试数据每学期公示。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 数据栏 -->
+<section class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="stat-num">1548</div><div class="stat-label">建校年份（明嘉靖）</div></div>
+    <div class="stat-item"><div class="stat-num">81</div><div class="stat-label">专职教师</div></div>
+    <div class="stat-item"><div class="stat-num">30+</div><div class="stat-label">综合实践课程</div></div>
+    <div class="stat-item"><div class="stat-num">500</div><div class="stat-label">惠荫园年岁</div></div>
+  </div>
+</section>
+
+<!-- 招生快入口 -->
+<section class="section">
+  <div class="container">
+    <div class="section-head fade-up">
+      <h3><span class="en">ADMISSION</span>招生入学</h3>
+      <a href="#" class="more">详细指南 →</a>
+    </div>
+    <div class="about-grid fade-up">
+      <div class="about-cell">
+        <div class="num">— 对象 —</div>
+        <h4>地段生</h4>
+        <p>与振华、景范、平江共享施教区。本区户籍 / 本区房产 / 积分达标应届小学毕业生。</p>
+      </div>
+      <div class="about-cell">
+        <div class="num">— 材料 —</div>
+        <h4>现场审核带这些</h4>
+        <p>网上报名导出表 · 房产权证 · 户口本 · 结婚证/出生证（如不同户）· 离异带协议。一户来一位监护人，不带孩子。</p>
+      </div>
+      <div class="about-cell">
+        <div class="num">— 联系 —</div>
+        <h4>咨询方式</h4>
+        <p>电话：0512-67272561 / 0512-80805193<br>联系人：翁老师、王老师<br>地址：临顿路南显子巷18号<br>绿色出行，车不进校。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <div class="seal">一初</div>
+      <p>苏州市第一初级中学校</p>
+      <p>苏州市教育局直属公办初中</p>
+      <p style="margin-top:12px;">临顿路南显子巷18号</p>
+      <p>电话：0512-67276024</p>
+    </div>
+    <div class="footer-col">
+      <h5>学校</h5>
+      <a href="#">学校概况</a>
+      <a href="#">校史与惠荫园</a>
+      <a href="#">教育理念</a>
+      <a href="#">荣誉长廊</a>
+    </div>
+    <div class="footer-col">
+      <h5>教学</h5>
+      <a href="#">课程设置</a>
+      <a href="#">师资队伍</a>
+      <a href="#">教育科研</a>
+      <a href="#">招生信息</a>
+    </div>
+    <div class="footer-col">
+      <h5>生活</h5>
+      <a href="#">校园新闻</a>
+      <a href="#">通知公告</a>
+      <a href="#">社团活动</a>
+      <a href="#">家长学校</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 苏州市第一初级中学校 · 苏ICP备XXXXXXXX号 · 设计参考日式学校官网风格
+  </div>
+</footer>
+
+<script>
+// 淡入
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+</script>
+
 </body>
 </html>
