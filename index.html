@@ -1,326 +1,176 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>wxhn</title>
-    <link rel="icon" type="image/png" href="https://s41.ax1x.com/2026/08/10/pmbcS0K.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { width: 100%; height: 100%; font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; color: white; overflow-x: hidden; overflow-y: auto; }
-        body { background: #050505 url('https://s41.ax1x.com/2026/04/03/peYnzut.jpg') no-repeat center center fixed; background-size: cover; }
-        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.55); z-index: -1; }
-        .snow-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
-        .snowflake { position: absolute; top: -10px; background: white; border-radius: 50%; opacity: 0.8; filter: blur(0.5px); }
-        @keyframes fall { 0% { transform: translateY(-10px) translateX(0px) rotate(0deg); opacity: 0.8; } 100% { transform: translateY(calc(100vh + 10px)) translateX(calc(20px * var(--wind))) rotate(360deg); opacity: 0.2; } }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>wxhn</title>
+<meta name="description" content="wxhn 的个人主页">
+<meta name="theme-color" content="#050505">
+<meta name="color-scheme" content="dark">
+<meta property="og:title" content="wxhn">
+<meta property="og:description" content="wxhn 的个人主页">
+<meta property="og:image" content="https://s41.ax1x.com/2026/08/10/pmbcS0K.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yuan5358.github.io/">
+<link rel="canonical" href="https://yuan5358.github.io/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/png" href="https://s41.ax1x.com/2026/08/10/pmbcS0K.png">
+<link rel="preconnect" href="https://s41.ax1x.com" crossorigin>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{color-scheme:dark;--glass:rgba(0,0,0,.45);--line:rgba(255,255,255,.14)}
+html{-webkit-text-size-adjust:100%}
+body{min-height:100vh;min-height:100dvh;background:#050505;color:#fff;font-family:system-ui,-apple-system,"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;-webkit-tap-highlight-color:transparent}
+.bg{position:fixed;inset:0;z-index:-2;background:#050505 url(https://s41.ax1x.com/2026/04/03/peYnzut.jpg) center/cover no-repeat}
+.bg::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55)}
+#snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+:focus-visible{outline:2px solid #fff;outline-offset:3px}
 
-        .page {
-          position: relative;
-          z-index: 2;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          padding: 12vh 16px 6vh;
-        }
+.page{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;padding:max(10vh,72px) 16px calc(5vh + env(safe-area-inset-bottom))}
+.avatar{width:110px;height:110px;border-radius:30px;object-fit:cover;border:2px solid rgba(255,255,255,.35);box-shadow:0 8px 28px rgba(0,0,0,.5);margin-bottom:18px;animation:rise .6s ease backwards}
+h1{font-size:clamp(28px,8vw,34px);font-weight:600;letter-spacing:3px;text-shadow:0 2px 6px rgba(0,0,0,.6);margin-bottom:6px;animation:rise .6s .08s ease backwards}
+.sub{color:rgba(235,235,235,.85);font-size:15px;letter-spacing:3px;margin-bottom:32px;text-shadow:0 1px 4px rgba(0,0,0,.5);animation:rise .6s .14s ease backwards}
 
-        .avatar-box { width: 110px; height: 110px; border-radius: 30px; overflow: hidden; border: 2px solid rgba(255, 255, 255, 0.35); box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5); margin-bottom: 18px; }
-        .avatar-box img { width: 100%; height: 100%; object-fit: cover; }
+.links{display:flex;flex-direction:column;gap:12px;width:min(350px,100%)}
+.card{--c:#fff;display:flex;align-items:center;gap:14px;width:100%;min-height:58px;padding:11px 18px 11px 12px;border:1px solid var(--line);border-radius:14px;background:var(--glass);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#fff;font-family:inherit;font-size:17px;font-weight:500;text-align:left;text-decoration:none;cursor:pointer;transition:transform .25s,background .25s,border-color .25s;animation:rise .6s ease backwards;animation-delay:calc(.2s + var(--i)*.07s)}
+.ico{display:grid;place-items:center;flex-shrink:0;width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.1);background:color-mix(in srgb,var(--c) 20%,transparent);color:var(--c);font-size:20px}
+.ico svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.card:active{transform:scale(.98)}
+@media(hover:hover){.card:hover{transform:translateY(-3px);background:rgba(0,0,0,.62);border-color:var(--c)}}
+.featured{display:block;width:min(350px,100%);margin-top:20px;padding:14px 22px;background:rgba(255,215,0,.12);border:1px solid rgba(255,215,0,.3);border-radius:14px;color:#ffd700;font-size:17px;font-weight:500;text-align:center;text-decoration:none;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:transform .25s,background .25s;animation:rise .6s .5s ease backwards}
+@media(hover:hover){.featured:hover{background:rgba(255,215,0,.22);transform:translateY(-2px)}}
+.foot{margin-top:18px;font-size:13px;color:rgba(255,255,255,.6)}
 
-        h1 { font-size: 34px; letter-spacing: 3px; font-weight: 600; text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6); margin-bottom: 6px; }
-        .subtitle { color: rgba(230, 230, 230, 0.8); font-size: 15px; letter-spacing: 4px; margin-bottom: 32px; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5); }
+.menu-btn{position:fixed;top:max(12px,env(safe-area-inset-top));left:12px;z-index:20;display:grid;place-content:center;gap:5px;width:44px;height:44px;border:1px solid var(--line);border-radius:12px;background:rgba(0,0,0,.4);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);cursor:pointer}
+.menu-btn span{display:block;width:20px;height:2px;border-radius:2px;background:rgba(255,255,255,.9);transition:transform .25s,opacity .25s}
+.menu-btn[aria-expanded=true] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.menu-btn[aria-expanded=true] span:nth-child(2){opacity:0}
+.menu-btn[aria-expanded=true] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.panel{position:fixed;top:calc(max(12px,env(safe-area-inset-top)) + 52px);left:12px;z-index:20;width:min(240px,calc(100vw - 24px));padding:8px;border:1px solid var(--line);border-radius:14px;background:rgba(10,10,10,.82);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);visibility:hidden;opacity:0;transform:translateY(-6px);transition:.2s}
+.panel.open{visibility:visible;opacity:1;transform:none}
+.panel button,.panel a{text-decoration:none;display:flex;justify-content:space-between;align-items:center;width:100%;min-height:44px;padding:0 12px;border:0;border-radius:10px;background:none;color:#fff;font-family:inherit;font-size:15px;cursor:pointer}
+@media(hover:hover){.panel button:hover,.panel a:hover{background:rgba(255,255,255,.08)}}
+.panel hr{border:0;border-top:1px solid var(--line);margin:6px 4px}
+.sw{position:relative;width:36px;height:20px;border-radius:10px;background:rgba(255,255,255,.25);transition:background .2s}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .2s}
+[aria-pressed=true] .sw{background:#4cc38a}
+[aria-pressed=true] .sw::after{transform:translateX(16px)}
+.toast{position:fixed;left:50%;bottom:max(24px,env(safe-area-inset-bottom));z-index:30;max-width:90vw;padding:10px 18px;border:1px solid var(--line);border-radius:999px;background:rgba(20,20,20,.92);font-size:14px;opacity:0;pointer-events:none;transform:translate(-50%,16px);transition:.25s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
 
-        .links { display: flex; flex-direction: column; gap: 12px; width: 350px; max-width: 100%; }
-        
-        .card {
-          background: rgba(0, 0, 0, 0.45);
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
-          padding: 15px 22px;
-          border-radius: 14px;
-          text-decoration: none;
-          color: #fff;
-          display: flex;
-          align-items: center;
-          font-size: 17px;
-          font-weight: 500;
-          transition: all 0.25s ease;
-        }
-        .card:hover { transform: translateY(-3px); background: rgba(0, 0, 0, 0.6); }
-        .card i, .card svg { width: 26px; margin-right: 16px; font-size: 22px; display: flex; justify-content: center; flex-shrink: 0; }
-        .card[href*="spotify"] { display: none; }
-        .discord-svg-icon { fill: #5865F2; }
-        .fa-steam { color: #66c0f4; }
-        .fa-youtube { color: #ff0000; }
-        .bilibili-icon { fill: #fb7299; }
-
-        .sunshine-link { display: block; width: 350px; max-width: 100%; padding: 14px 22px; background: rgba(255, 215, 0, 0.12); border: 1px solid rgba(255, 215, 0, 0.25); border-radius: 14px; text-decoration: none; color: #FFD700; font-size: 17px; font-weight: 500; text-align: center; transition: all 0.25s ease; margin: 20px auto 0; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
-        .sunshine-link:hover { background: rgba(255, 215, 0, 0.22); transform: translateY(-2px); }
-
-        .download-link { display: block; margin-top: 14px; font-size: 12px; color: rgba(255, 255, 255, 0.25); text-decoration: none; text-align: center; transition: color 0.2s ease; }
-        .download-link:hover { color: rgba(255, 255, 255, 0.5); }
-
-        @media (max-width: 520px) {
-          .page { padding: 8vh 12px 4vh; }
-          h1 { font-size: 28px; }
-          .subtitle { font-size: 13px; letter-spacing: 3px; margin-bottom: 24px; }
-          .links { width: 310px; gap: 10px; }
-          .card { padding: 13px 18px; font-size: 15px; }
-          .sunshine-link { width: 310px; padding: 12px 18px; font-size: 15px; }
-          .avatar-box { width: 96px; height: 96px; border-radius: 26px; }
-        }
-
-        /* menu */
-        .menu-btn {
-          position: fixed;
-          top: 16px;
-          left: 16px;
-          width: 26px;
-          height: 20px;
-          background: none;
-          border: none;
-          cursor: pointer;
-          z-index: 9999;
-          padding: 0;
-        }
-        .menu-btn span {
-          display: block;
-          width: 100%;
-          height: 2px;
-          background: rgba(233, 221, 208, 0.63);
-          margin: 5px 0;
-          border-radius: 2px;
-          transition: background 0.2s;
-        }
-        .menu-btn:hover span { background: rgba(236, 227, 217, 0.895); }
-        .pop-menu {
-          position: fixed;
-          top: 48px;
-          left: 16px;
-          background: rgba(0, 0, 0, 0.92);
-          border: 1px solid rgba(177, 153, 125, 0.32);
-          border-radius: 12px;
-          padding: 6px 0;
-          min-width: 180px;
-          display: none;
-          flex-direction: column;
-          z-index: 8888;
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
-        }
-        .pop-menu a {
-          display: block;
-          padding: 12px 20px;
-          color: rgba(246, 240, 233, 0.9);
-          text-decoration: none;
-          font-size: 15px;
-          letter-spacing: 1px;
-          text-align: left;
-          transition: background 0.18s;
-          border-bottom: 1px solid rgba(139, 117, 98, 0.18);
-        }
-        .pop-menu a:last-child { border-bottom: none; }
-        .pop-menu a:hover { background: rgba(250, 242, 232, 0.06); color: #fff; }
-        .hide-old { display: none !important; }
-
-        /* 简洁弹窗 */
-        .notice-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            visibility: hidden;
-            opacity: 0;
-            transition: opacity 0.25s ease, visibility 0.25s ease;
-        }
-        .notice-overlay.show {
-            visibility: visible;
-            opacity: 1;
-        }
-        .notice-box {
-            background: #1a1a1a;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            padding: 24px 24px 20px;
-            width: 90%;
-            max-width: 400px;
-            color: #e0e0e0;
-            font-size: 15px;
-            line-height: 1.8;
-        }
-        .notice-box p {
-            margin-bottom: 10px;
-        }
-        .notice-box p:last-of-type {
-            margin-bottom: 0;
-        }
-        .notice-box a {
-            color: #7fc9ff;
-            text-decoration: none;
-            word-break: break-all;
-        }
-        .notice-box a:hover {
-            text-decoration: underline;
-        }
-        .notice-btn {
-            display: block;
-            margin: 20px 0 0 auto;
-            padding: 8px 24px;
-            border-radius: 8px;
-            font-size: 14px;
-            cursor: pointer;
-            background: rgba(255, 255, 255, 0.1);
-            color: #e0e0e0;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: background 0.2s;
-        }
-        .notice-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        @media (max-width: 520px) {
-            .notice-box {
-                padding: 20px 18px 16px;
-                font-size: 14px;
-            }
-        }
-    </style>
+.splash{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;width:100%;height:100vh;height:100dvh;border:0;background:rgba(5,5,5,.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:#fff;font-family:inherit;cursor:pointer;transition:opacity .45s,transform .45s}
+.splash.out{opacity:0;transform:scale(1.04);pointer-events:none}
+.sp-avatar{width:96px;height:96px;border-radius:26px;object-fit:cover;border:2px solid rgba(255,255,255,.35);box-shadow:0 8px 28px rgba(0,0,0,.5)}
+.sp-name{font-size:clamp(30px,9vw,40px);font-weight:600;letter-spacing:4px;text-shadow:0 2px 6px rgba(0,0,0,.6)}
+.sp-hint{font-size:14px;letter-spacing:4px;color:rgba(255,255,255,.7);animation:pulse 2.4s ease-in-out infinite}
+body.locked{overflow:hidden}
+body:not(.ready) .page *{animation-play-state:paused}
+@keyframes pulse{50%{opacity:.35}}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}}
+@media(prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important}}
+@media(max-width:520px){.sub{font-size:13px;margin-bottom:24px}.card{font-size:16px}}
+</style>
+<noscript><style>.splash{display:none}body:not(.ready) .page *{animation-play-state:running}</style></noscript>
 </head>
 <body>
-    <button class="menu-btn" onclick="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <div class="pop-menu" id="popMenu">
-      <a href="https://yuan5358.github.io/tupian/" target="_blank">历史背景</a>
-      <a href="https://yuan5358.github.io/Download" target="_blank">下载</a>
-      <a href="https://yuan5358.github.io/story" target="_blank">个人故事</a>
-    </div>
+<button class="splash" id="splash" aria-label="进入网站" autofocus>
+  <img class="sp-avatar" src="https://s41.ax1x.com/2026/08/10/pmbcS0K.png" alt="" width="96" height="96">
+  <span class="sp-name">Roland</span>
+  <span class="sp-hint">点击进入</span>
+</button>
+<div class="bg" aria-hidden="true"></div>
+<canvas id="snow" aria-hidden="true"></canvas>
 
-    <div class="snow-container" id="snow-container"></div>
+<button class="menu-btn" id="menuBtn" aria-label="菜单" aria-expanded="false" aria-controls="panel"><span></span><span></span><span></span></button>
+<div class="panel" id="panel">
+  <a href="sofree">sofree</a>
+  <a href="个人故事">story</a>
+  <a href="学校">ycz</a>
+  <a href="下载">Download</a>
+  <hr>
+  <button id="snowBtn" aria-pressed="true">雪花效果<span class="sw"></span></button>
+  <button id="copyBtn">复制页面链接</button>
+</div>
 
-    <div class="page">
-        <div class="avatar-box">
-            <img src="https://s41.ax1x.com/2026/02/18/pZOIyGT.png" alt="Avatar">
-        </div>
-        <h1>YUAN_E</h1>
-        <p class="subtitle">我讨厌开学</p>
-        <div class="links">
-            <a href="https://discord.gg/d2PmCuJZhs" target="_blank" class="card">
-                <svg class="discord-svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.14 96.36" width="26" height="26">
-                    <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
-                </svg>
-                <span>Discord</span>
-            </a>
-            <a href="https://steamcommunity.com/profiles/76561198764721039/" target="_blank" class="card">
-                <i class="fab fa-steam"></i><span>Steam</span>
-            </a>
-            <a href="https://space.bilibili.com/3546393341856275" target="_blank" class="card">
-                <svg class="bilibili-icon" viewBox="0 0 1024 1024">
-                    <path d="M777.9 171.4c0.4-0.5 0.8-1 1.2-1.5 4.1-5 2.8-8.7-2.8-11.2-5.8-2.5-11.7-2.9-18 4.1-4.1 4.5-8.1 9.1-12.1 13.8L651 281.3H373l-95.2-104.7c-4-4.7-8-9.3-12.1-13.8-6.3-7-12.2-6.6-18-4.1-5.6 2.5-6.9 6.2-2.8 11.2 0.4 0.5 0.8 1 1.2 1.5l104.6 114.7H214.9c-50.6 0-91.6 41-91.6 91.6v407c0 50.6 41 91.6 91.6 91.6h594.2c50.6 0 91.6-41 91.6-91.6V377.1c0-50.6-41-91.6-91.6-91.6H673.3l104.6-114.1zM288.2 463.3c34.4 0 62.3 27.9 62.3 62.3s-27.9 62.3-62.3 62.3-62.3-27.9-62.3-62.3 27.9-62.3 62.3-62.3z m447.6 124.6c-34.4 0-62.3-27.9-62.3-62.3s27.9-62.3 62.3-62.3 62.3 27.9 62.3 62.3-27.9 62.3-62.3 62.3z"></path>
-                </svg>
-                <span>Bilibili</span>
-            </a>
-            <a href="https://m.youtube.com/channel/UCh-DzP5PUASsL55P27GyRYg" target="_blank" class="card">
-                <i class="fab fa-youtube"></i><span>YouTube</span>
-            </a>
-        </div>
-        <a href="https://yuan5358.github.io/tupian/" target="_blank" class="sunshine-link hide-old">历史背景</a>
-        <a href="https://yuan5358.github.io/Download" target="_blank" class="download-link hide-old">下载</a>
-    </div>
+<main class="page">
+  <img class="avatar" src="https://s41.ax1x.com/2026/08/10/pmbcS0K.png" alt="wxhn 的头像" width="110" height="110" fetchpriority="high" decoding="async">
+  <h1>wxhn</h1>
+  <p class="sub">天气有点冷🥶</p>
 
-    <!-- 简洁告知弹窗 -->
-    <div class="notice-overlay" id="noticeOverlay">
-        <div class="notice-box">
-            <p>本网站仅为我无聊创建</p>
-            <p>本人随时可能会关闭网站</p>
-            <p>我最近在重构我们学校的网站</p>
-            <p><a href="https://hetare.cc.cd/ycz/" target="_blank">https://hetare.cc.cd/ycz/</a></p>
-            <p>兴趣的可以点进看进度</p>
-            <button class="notice-btn" id="noticeCancelBtn">取消</button>
-        </div>
-    </div>
+  <nav class="links" aria-label="社交链接">
+    <a class="card" style="--i:0;--c:#66c0f4" href="https://steamcommunity.com/" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><circle cx="14.8" cy="9.6" r="2.7"/><circle cx="9" cy="15" r="1.6" fill="currentColor"/><path d="M10.4 13.4l2.3-2"/></svg></span>Steam</a>
+    <a class="card" style="--i:1;--c:#ff3b3b" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="4.5"/><path d="M10 9.3v5.4l4.5-2.7z" fill="currentColor"/></svg></span>YouTube</a>
+    <a class="card" style="--i:2;--c:#fb7299" href="https://www.bilibili.com/" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 4l2.5 2.5M16 4l-2.5 2.5"/><rect x="3" y="7" width="18" height="12" rx="3.5"/><path d="M8.5 12v1.5M15.5 12v1.5"/></svg></span>哔哩哔哩</a>
+    <button class="card" style="--i:3;--c:#7983f5" data-copy="yuan_e_5263"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5.5C8 4.6 10 4.2 12 4.2s4 .4 6 1.3c1.6 2.7 2.6 5.6 2.8 9.2-1.5 1.2-3.1 2-4.8 2.5l-1-2M6 5.5C4.4 8.2 3.4 11.1 3.2 14.7c1.5 1.2 3.1 2 4.8 2.5l1-2M8.5 16.2c2.2.6 4.8.6 7 0"/><circle cx="9" cy="11.8" r="1" fill="currentColor"/><circle cx="15" cy="11.8" r="1" fill="currentColor"/></svg></span>Discord点击复制用户名</button>
+  </nav>
 
-    <script>
-        // 雪花效果
-        function createSnowflake() {
-            const snowflake = document.createElement('div');
-            snowflake.classList.add('snowflake');
-            const size = Math.random() * 5 + 3;
-            snowflake.style.width = `${size}px`;
-            snowflake.style.height = `${size}px`;
-            snowflake.style.left = `${Math.random() * 100}vw`;
-            const duration = Math.random() * 5 + 8;
-            const delay = Math.random() * 5;
-            const wind = Math.random() * 10 - 5;
-            snowflake.style.animation = `fall ${duration}s linear ${delay}s infinite`;
-            snowflake.style.setProperty('--wind', wind);
-            snowflake.style.opacity = Math.random() * 0.7 + 0.3;
-            document.getElementById('snow-container').appendChild(snowflake);
-            setTimeout(() => { snowflake.remove(); }, (duration + delay) * 1000);
-        }
-        function createSnowflakes() {
-            const snowCount = 100;
-            for (let i = 0; i < snowCount; i++) {
-                setTimeout(() => { createSnowflake(); }, i * 300);
-            }
-            setInterval(() => { createSnowflake(); }, 300);
-        }
-        window.addEventListener('load', createSnowflakes);
+  <a class="featured" href="#">精选内容</a>
+  <p class="foot">感谢浏览</p>
+</main>
 
-        // 菜单
-        function toggleMenu() {
-          const menu = document.getElementById("popMenu");
-          menu.style.display = menu.style.display === "block" ? "none" : "block";
-        }
-        document.addEventListener("click", e => {
-          if (!e.target.closest(".menu-btn") && !e.target.closest("#popMenu")) {
-            document.getElementById("popMenu").style.display = "none";
-          }
-        });
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-        // 弹窗逻辑
-        (function() {
-            const overlay = document.getElementById('noticeOverlay');
-            const cancelBtn = document.getElementById('noticeCancelBtn');
+<script>
+const $=s=>document.querySelector(s);
+const toast=$('#toast');let tt;
+function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('show'),1800)}
+async function copy(t){
+  try{await navigator.clipboard.writeText(t)}
+  catch{const a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()}
+  say('已复制：'+t)
+}
+document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>copy(b.dataset.copy)));
 
-            function showNotice() {
-                requestAnimationFrame(() => {
-                    overlay.classList.add('show');
-                });
-            }
+const mb=$('#menuBtn'),pn=$('#panel');
+const menu=o=>{pn.classList.toggle('open',o);mb.setAttribute('aria-expanded',o)};
+mb.addEventListener('click',e=>{e.stopPropagation();menu(!pn.classList.contains('open'))});
+document.addEventListener('click',e=>{if(!pn.contains(e.target))menu(false)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu(false);mb.focus()}});
+$('#copyBtn').addEventListener('click',()=>{copy(location.href);menu(false)});
 
-            function closeNotice() {
-                overlay.classList.remove('show');
-            }
+const cv=$('#snow'),g=cv.getContext('2d'),sb=$('#snowBtn');
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let on,fl=[],raf,W,H;
+try{on=localStorage.getItem('snow')}catch{}
+on=on==null?!reduce:on==='1';
+function fit(){
+  const d=Math.min(devicePixelRatio||1,2);
+  W=innerWidth;H=innerHeight;cv.width=W*d;cv.height=H*d;g.setTransform(d,0,0,d,0,0);
+  const n=Math.round(Math.min(90,Math.max(30,W/14)));
+  if(fl.length!==n)fl=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2+1,v:Math.random()+.5,p:Math.random()*6.28}));
+}
+function tick(){
+  g.clearRect(0,0,W,H);g.fillStyle='#fff';
+  for(const f of fl){
+    f.p+=.01;f.y+=f.v;f.x+=Math.sin(f.p)*.5+.15;
+    if(f.y>H+4){f.y=-4;f.x=Math.random()*W}
+    if(f.x>W+4)f.x=-4;
+    g.globalAlpha=.3+f.r*.18;g.beginPath();g.arc(f.x,f.y,f.r,0,6.283);g.fill();
+  }
+  raf=requestAnimationFrame(tick);
+}
+function snow(o){
+  on=o;sb.setAttribute('aria-pressed',o);cancelAnimationFrame(raf);g.clearRect(0,0,W,H);
+  if(o)tick();
+  try{localStorage.setItem('snow',o?1:0)}catch{}
+}
+fit();snow(on);
+sb.addEventListener('click',()=>snow(!on));
+addEventListener('resize',fit);
 
-            cancelBtn.addEventListener('click', closeNotice);
-
-            overlay.addEventListener('click', function(e) {
-                if (e.target === overlay) {
-                    closeNotice();
-                }
-            });
-
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && overlay.classList.contains('show')) {
-                    closeNotice();
-                }
-            });
-
-            window.addEventListener('load', function() {
-                setTimeout(showNotice, 200);
-            });
-
-            if (document.readyState === 'complete') {
-                setTimeout(showNotice, 200);
-            }
-        })();
-    </script>
+const SPLASH='always';
+const sp=$('#splash'),gated=document.querySelectorAll('.page,.menu-btn');
+function enter(){document.body.classList.remove('locked');document.body.classList.add('ready');gated.forEach(e=>e.inert=false)}
+let seen;try{seen=sessionStorage.getItem('seen')}catch{}
+if(SPLASH==='off'||(SPLASH==='session'&&seen)){sp.remove();enter()}
+else{
+  document.body.classList.add('locked');gated.forEach(e=>e.inert=true);
+  sp.addEventListener('click',()=>{
+    sp.classList.add('out');
+    try{sessionStorage.setItem('seen','1')}catch{}
+    enter();setTimeout(()=>sp.remove(),500);
+  });
+}
+</script>
 </body>
 </html>
