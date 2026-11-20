@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#050505">
 <meta name="color-scheme" content="dark">
 <meta property="og:title" content="wxhn">
-<meta property="og:description" content="yuan 的个人主页">
+<meta property="og:description" content="wxhn 的个人主页">
 <meta property="og:image" content="https://i.postimg.cc/YGF1kzV7/Image-1787996545032-703.jpg">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://yuan5358.github.io/">
@@ -36,7 +36,8 @@ h1{font-size:clamp(28px,8vw,34px);font-weight:600;letter-spacing:3px;text-shadow
 .links{display:flex;flex-direction:column;gap:12px;width:min(350px,100%)}
 .card{--c:#fff;display:flex;align-items:center;gap:14px;width:100%;min-height:58px;padding:11px 18px 11px 12px;border:1px solid var(--line);border-radius:14px;background:var(--glass);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#fff;font-family:inherit;font-size:17px;font-weight:500;text-align:left;text-decoration:none;cursor:pointer;transition:transform .25s,background .25s,border-color .25s;animation:rise .6s ease backwards;animation-delay:calc(.2s + var(--i)*.07s)}
 .ico{display:grid;place-items:center;flex-shrink:0;width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.1);background:color-mix(in srgb,var(--c) 20%,transparent);color:var(--c);font-size:20px}
-.ico svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* 调整了这里的 SVG 样式，以完美显示填充风格的官方图标 */
+.ico svg{width:22px;height:22px;fill:currentColor}
 .card:active{transform:scale(.98)}
 @media(hover:hover){.card:hover{transform:translateY(-3px);background:rgba(0,0,0,.62);border-color:var(--c)}}
 .featured{display:block;width:min(350px,100%);margin-top:20px;padding:14px 22px;background:rgba(255,215,0,.12);border:1px solid rgba(255,215,0,.3);border-radius:14px;color:#ffd700;font-size:17px;font-weight:500;text-align:center;text-decoration:none;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:transform .25s,background .25s;animation:rise .6s .5s ease backwards}
@@ -94,27 +95,27 @@ h1{font-size:clamp(28px,8vw,34px);font-weight:600;letter-spacing:3px;text-shadow
   <p class="sub">yuan 的个人主页</p>
 
   <div class="links">
-    <!-- Discord 链接，请将 href 替换为你的个人服务器或主页邀请链接 -->
+    <!-- Discord -->
     <a class="card" style="--i:0;--c:#5865F2" href="https://discord.gg/" target="_blank" rel="noopener">
-      <span class="ico"><svg viewBox="0 0 24 24"><path d="M8.5 13a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm7 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/><path d="M20.5 4.3A16.8 16.8 0 0 0 16 2.7l-.5 1.1a15.8 15.8 0 0 0-3 0L12 2.7a16.8 16.8 0 0 0-4.5 1.6C3.8 8.6 2.5 12.8 3.2 16.9A16.9 16.9 0 0 0 8.6 19.6c.4-.6.8-1.3 1.1-2a9.3 9.3 0 0 1-1.8-1c.1-.1.3-.2.4-.3a12.8 12.8 0 0 0 11.4 0c.1.1.3.2.4.3a9.3 9.3 0 0 1-1.8 1c.3.7.7 1.4 1.1 2a16.9 16.9 0 0 0 5.4-2.7c.7-4.1-.6-8.3-2.8-11.2z"/></svg></span>
+      <span class="ico"><svg viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></span>
       Discord
     </a>
     
-    <!-- Steam 链接，请将 href 替换为你的 Steam 个人资料页链接 -->
+    <!-- Steam -->
     <a class="card" style="--i:1;--c:#66c0f4" href="https://store.steampowered.com/" target="_blank" rel="noopener">
-      <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-9.9 8.8l5.3 2.2A2.8 2.8 0 0 1 9.2 12c.9 0 1.8.5 2.4 1.2l2.8-1.3a2.8 2.8 0 1 1 2.8 2.8h-.2l-1.3 2.8a2.8 2.8 0 1 1-2.8-2.8h.2L11 12a2.8 2.8 0 0 1-2.9 2.7L6 13.6A10 10 0 1 0 12 2z"/><circle cx="15.5" cy="9.5" r="1"/></svg></span>
+      <span class="ico"><svg viewBox="0 0 24 24"><path d="M11.979 0C5.678 0 .511 4.86 0 11.022l6.44 2.662a3.59 3.59 0 0 1 2.056-.643c.066 0 .131 0 .197.005l2.859-4.14v-.059c0-2.471 2.01-4.48 4.48-4.48 2.471 0 4.48 2.009 4.48 4.48s-2.009 4.48-4.48 4.48l-.117-.006-4.08 2.913a3.6 3.6 0 0 1-3.542 3.02 3.6 3.6 0 0 1-3.612-3.403L.234 14.68a11.982 11.982 0 0 0 11.745 9.32c6.627 0 12-5.372 12-12S18.606 0 11.979 0zm4.48 5.618a4.865 4.865 0 0 1 4.874 4.866 4.865 4.865 0 0 1-4.874 4.866 4.866 4.866 0 0 1-4.874-4.866 4.866 4.866 0 0 1 4.874-4.866zm0 1.756a3.11 3.11 0 1 0 0 6.22 3.11 3.11 0 0 0 0-6.22zM9.086 14.732a2.182 2.182 0 0 0-3.078.892 2.19 2.19 0 0 0 .32 2.496l-2.7-1.116a2.191 2.191 0 0 1 1.256-2.828l-.003-.013a2.191 2.191 0 0 1 3.824 2.107 2.155 2.155 0 0 0 .381-1.538z"/></svg></span>
       Steam
     </a>
     
-    <!-- Bilibili 链接，请将 href 替换为你的 B站空间链接 -->
+    <!-- Bilibili -->
     <a class="card" style="--i:2;--c:#fb7299" href="https://space.bilibili.com/" target="_blank" rel="noopener">
-      <span class="ico"><svg viewBox="0 0 24 24"><path d="M7 3 4 6m13-3 3 3M4 8h16a1 1 0 0 1 1 1v9a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V9a1 1 0 0 1 1-1Z"/><path d="M9 12v3m6-3v3"/></svg></span>
+      <span class="ico"><svg viewBox="0 0 24 24"><path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.786 1.894v7.52c.017.764.28 1.395.786 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.498.769-1.129.786-1.893v-7.52c-.017-.765-.28-1.396-.786-1.894-.507-.497-1.134-.755-1.88-.773zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c0-.373.129-.689.386-.947.258-.257.574-.386.947-.386zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373z"/></svg></span>
       Bilibili
     </a>
     
-    <!-- YouTube 链接，请将 href 替换为你的频道链接 -->
+    <!-- YouTube -->
     <a class="card" style="--i:3;--c:#FF0000" href="https://www.youtube.com/" target="_blank" rel="noopener">
-      <span class="ico"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3z"/></svg></span>
+      <span class="ico"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></span>
       YouTube
     </a>
   </div>
