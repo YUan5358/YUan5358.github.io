@@ -22,6 +22,7 @@
 :root{color-scheme:dark;--glass:rgba(0,0,0,.45);--line:rgba(255,255,255,.14)}
 html{-webkit-text-size-adjust:100%}
 body{min-height:100vh;min-height:100dvh;background:#050505;color:#fff;font-family:system-ui,-apple-system,"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;-webkit-tap-highlight-color:transparent}
+body.no-scroll{overflow:hidden}
 .bg{position:fixed;inset:0;z-index:-2;background:#050505 url(https://s41.ax1x.com/2026/04/03/peYnzut.jpg) center/cover no-repeat}
 .bg::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55)}
 #snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
@@ -47,131 +48,241 @@ h1{font-size:clamp(28px,8vw,34px);font-weight:600;letter-spacing:3px;text-shadow
 .menu-btn[aria-expanded=true] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .menu-btn[aria-expanded=true] span:nth-child(2){opacity:0}
 .menu-btn[aria-expanded=true] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.panel{position:fixed;top:calc(max(12px,env(safe-area-inset-top)) + 52px);left:12px;z-index:20;width:min(240px,calc(100vw - 24px));padding:8px;border:1px solid var(--line);border-radius:14px;background:rgba(10,10,10,.82);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);visibility:hidden;opacity:0;transform:translateY(-6px);transition:.2s}
-.panel.open{visibility:visible;opacity:1;transform:none}
-.panel button,.panel a{text-decoration:none;display:flex;justify-content:space-between;align-items:center;width:100%;min-height:44px;padding:0 12px;border:0;border-radius:10px;background:none;color:#fff;font-family:inherit;font-size:15px;cursor:pointer}
-@media(hover:hover){.panel button:hover,.panel a:hover{background:rgba(255,255,255,.08)}}
-.panel hr{border:0;border-top:1px solid var(--line);margin:6px 4px}
-.sw{position:relative;width:36px;height:20px;border-radius:10px;background:rgba(255,255,255,.25);transition:background .2s}
-.sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .2s}
-[aria-pressed=true] .sw{background:#4cc38a}
-[aria-pressed=true] .sw::after{transform:translateX(16px)}
-.toast{position:fixed;left:50%;bottom:max(24px,env(safe-area-inset-bottom));z-index:30;max-width:90vw;padding:10px 18px;border:1px solid var(--line);border-radius:999px;background:rgba(20,20,20,.92);font-size:14px;opacity:0;pointer-events:none;transform:translate(-50%,16px);transition:.25s}
-.toast.show{opacity:1;transform:translate(-50%,0)}
+.panel{position:fixed;top:calc(max(12px,env(safe-area-inset-top)) + 52px);left:12px;z-index:20;width:min(240px,calc(100vw - 24px));padding:8px;border:1px solid var(--line);border-radius:14px;background:rgba(10,10,10,.82);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);visibility:hidden;opacity:0;transform:translateY(-6px);transition:visibility .2s,opacity .2s,transform .2s}
+.panel.open{visibility:visible;opacity:1;transform:translateY(0)}
+.panel a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;color:rgba(255,255,255,.88);text-decoration:none;font-size:15px;letter-spacing:1px;transition:background .2s,color .2s}
+.panel a:hover,.panel a:focus-visible{background:rgba(255,255,255,.1);color:#fff}
 
-.splash{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;width:100%;height:100vh;height:100dvh;border:0;background:rgba(5,5,5,.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:#fff;font-family:inherit;cursor:pointer;transition:opacity .45s,transform .45s}
-.splash.out{opacity:0;transform:scale(1.04);pointer-events:none}
-.sp-avatar{width:96px;height:96px;border-radius:26px;object-fit:cover;border:2px solid rgba(255,255,255,.35);box-shadow:0 8px 28px rgba(0,0,0,.5)}
-.sp-name{font-size:clamp(30px,9vw,40px);font-weight:600;letter-spacing:4px;text-shadow:0 2px 6px rgba(0,0,0,.6)}
-.sp-hint{font-size:14px;letter-spacing:4px;color:rgba(255,255,255,.7);animation:pulse 2.4s ease-in-out infinite}
-body.locked{overflow:hidden}
-body:not(.ready) .page *{animation-play-state:paused}
-@keyframes pulse{50%{opacity:.35}}
-@keyframes rise{from{opacity:0;transform:translateY(12px)}}
-@media(prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important}}
-@media(max-width:520px){.sub{font-size:13px;margin-bottom:24px}.card{font-size:16px}}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* ---------- 赞助弹窗 ---------- */
+.modal{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:24px;opacity:0;visibility:hidden;transition:opacity .28s ease,visibility .28s ease}
+.modal.show{opacity:1;visibility:visible}
+.modal-mask{position:absolute;inset:0;background:rgba(0,0,0,.68);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);cursor:pointer}
+.modal-box{position:relative;width:min(330px,100%);max-height:calc(100dvh - 48px);overflow:auto;padding:22px 20px 16px;border:1px solid rgba(255,255,255,.16);border-radius:20px;background:rgba(18,18,18,.94);box-shadow:0 24px 64px rgba(0,0,0,.65);text-align:center;transform:translateY(14px) scale(.95);transition:transform .32s cubic-bezier(.2,.9,.3,1.25)}
+.modal.show .modal-box{transform:translateY(0) scale(1)}
+.modal-box h2{font-size:19px;font-weight:600;letter-spacing:6px;text-indent:6px;color:#ffd700;margin-bottom:14px}
+.qr-wrap{position:relative;border-radius:14px;overflow:hidden;background:rgba(255,255,255,.06);min-height:120px;display:grid;place-items:center}
+.qr{display:block;width:100%;height:auto}
+.qr-fallback{display:none;padding:28px 12px;font-size:13px;line-height:1.8;color:rgba(255,255,255,.6)}
+.modal-tip{margin-top:14px;font-size:12.5px;letter-spacing:1px;color:rgba(255,255,255,.55)}
+.modal-close{position:absolute;top:8px;right:8px;width:32px;height:32px;display:grid;place-items:center;border:none;border-radius:50%;background:rgba(255,255,255,.1);color:rgba(255,255,255,.75);font-size:14px;line-height:1;cursor:pointer;transition:background .2s,color .2s}
+.modal-close:hover{background:rgba(255,255,255,.2);color:#fff}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;transition-duration:.01ms !important}
+}
 </style>
-<noscript><style>.splash{display:none}body:not(.ready) .page *{animation-play-state:running}</style></noscript>
 </head>
 <body>
-<button class="splash" id="splash" aria-label="进入网站" autofocus>
-  <img class="sp-avatar" src="https://i.postimg.cc/YGF1kzV7/Image-1787996545032-703.jpg" alt="" width="96" height="96">
-  <span class="sp-name">wxhn</span>
-  <span class="sp-hint">点击进入</span>
-</button>
-<div class="bg" aria-hidden="true"></div>
+<div class="bg"></div>
 <canvas id="snow" aria-hidden="true"></canvas>
 
-<button class="menu-btn" id="menuBtn" aria-label="菜单" aria-expanded="false" aria-controls="panel"><span></span><span></span><span></span></button>
-<div class="panel" id="panel">
-  <a href="sofree/">sofree</a>
-  <a href="story/">个人故事</a>
-  <a href="ycz/">学校</a>
-  <a href="Download/">下载</a>
-  <hr>
-  <button id="snowBtn" aria-pressed="true">雪花效果<span class="sw"></span></button>
-  <button id="copyBtn">复制页面链接</button>
-</div>
+<button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuPanel" aria-label="菜单">
+  <span></span><span></span><span></span>
+</button>
+<nav class="panel" id="menuPanel" aria-label="站内导航">
+  <a href="#top">首页</a>
+  <a href="#" id="sponsorLink">赞助</a>
+  <a href="https://github.com/yuan5358" target="_blank" rel="noopener">GitHub</a>
+</nav>
 
-<main class="page">
-  <img class="avatar" src="https://i.postimg.cc/YGF1kzV7/Image-1787996545032-703.jpg" alt="wxhn 的头像" width="110" height="110" fetchpriority="high" decoding="async">
-  <h1>Roland</h1>
-  <p class="sub">有点冷🥶</p>
+<main class="page" id="top">
+  <img class="avatar" src="https://i.postimg.cc/YGF1kzV7/Image-1787996545032-703.jpg" alt="头像" width="110" height="110">
 
-  <nav class="links" aria-label="社交链接">
-    <a class="card" style="--i:0;--c:#66c0f4" href="https://steamcommunity.com/profiles/76561198764721039/" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><circle cx="14.8" cy="9.6" r="2.7"/><circle cx="9" cy="15" r="1.6" fill="currentColor"/><path d="M10.4 13.4l2.3-2"/></svg></span>Steam</a>
-    <a class="card" style="--i:1;--c:#ff3b3b" href="https://www.youtube.com/@YUAN_E5263" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="4.5"/><path d="M10 9.3v5.4l4.5-2.7z" fill="currentColor"/></svg></span>YouTube</a>
-    <a class="card" style="--i:2;--c:#fb7299" href="https://space.bilibili.com/3546393341856275?spm_id_from=333.337.0.0" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 4l2.5 2.5M16 4l-2.5 2.5"/><rect x="3" y="7" width="18" height="12" rx="3.5"/><path d="M8.5 12v1.5M15.5 12v1.5"/></svg></span>哔哩哔哩</a>
-    <button class="card" style="--i:3;--c:#7983f5" data-copy="yuan_e_5263"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5.5C8 4.6 10 4.2 12 4.2s4 .4 6 1.3c1.6 2.7 2.6 5.6 2.8 9.2-1.5 1.2-3.1 2-4.8 2.5l-1-2M6 5.5C4.4 8.2 3.4 11.1 3.2 14.7c1.5 1.2 3.1 2 4.8 2.5l1-2M8.5 16.2c2.2.6 4.8.6 7 0"/><circle cx="9" cy="11.8" r="1" fill="currentColor"/><circle cx="15" cy="11.8" r="1" fill="currentColor"/></svg></span>Discord点击复制用户名</button>
-  </nav>
+  <h1>wxhn</h1>
+  <p class="sub">yuan 的个人主页</p>
 
-  <a class="featured" href="tupian">精选内容</a>
-  <p class="foot">感谢观看</p>
+  <div class="links">
+    <a class="card" style="--i:0;--c:#ffffff" href="https://github.com/yuan5358" target="_blank" rel="noopener">
+      <span class="ico"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3-.3 6.1-1.5 6.1-6.7a5.2 5.2 0 0 0-1.4-3.6 4.9 4.9 0 0 0-.1-3.6s-1.1-.3-3.6 1.4a12.3 12.3 0 0 0-6.4 0C7.2 1.3 6.1 1.6 6.1 1.6a4.9 4.9 0 0 0-.1 3.6A5.2 5.2 0 0 0 4.6 8.8c0 5.2 3.1 6.4 6.1 6.7a3.4 3.4 0 0 0-.9 2.6V22"/></svg></span>
+      GitHub
+    </a>
+    <a class="card" style="--i:1;--c:#ff8fb1" href="https://space.bilibili.com/" target="_blank" rel="noopener">
+      <span class="ico"><svg viewBox="0 0 24 24"><path d="M7 3 4 6m13-3 3 3M4 8h16a1 1 0 0 1 1 1v9a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V9a1 1 0 0 1 1-1Z"/><path d="M9 12v3m6-3v3"/></svg></span>
+      Bilibili
+    </a>
+    <a class="card" style="--i:2;--c:#6ab3ff" href="https://t.me/" target="_blank" rel="noopener">
+      <span class="ico"><svg viewBox="0 0 24 24"><path d="M21.5 4.5 2.8 11.6c-.9.3-.9 1.5 0 1.8l4.6 1.5 1.7 5.1c.2.7 1.1.9 1.6.3l2.5-2.4 4.6 3.3c.6.4 1.4.1 1.6-.6l3-14.6c.2-.9-.7-1.6-1.5-1.5Z"/><path d="m7.5 14.9 10-7.4-7.6 8.6-.5 3.6"/></svg></span>
+      Telegram
+    </a>
+    <a class="card" style="--i:3;--c:#8be28b" href="mailto:yuan@example.com">
+      <span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6 8.5-6"/></svg></span>
+      邮箱
+    </a>
+  </div>
+
+  <a class="featured" href="#" id="featuredSponsor">☕ 赞助支持</a>
+
+  <p class="foot">© 2026 wxhn</p>
 </main>
 
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<!-- ========== 赞助弹窗 ========== -->
+<div class="modal" id="sponsorModal" aria-hidden="true">
+  <div class="modal-mask" data-close></div>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="sponsorTitle">
+    <button class="modal-close" type="button" data-close aria-label="关闭">✕</button>
+    <h2 id="sponsorTitle">赞助</h2>
+    <div class="qr-wrap">
+      <img class="qr" id="sponsorImg" src="https://imgchr.com/i/pnqGqO0" alt="赞助二维码" loading="eager">
+      <p class="qr-fallback">图片加载失败<br>请把 src 换成图片直链</p>
+    </div>
+    <p class="modal-tip">点击空白处关闭</p>
+  </div>
+</div>
 
 <script>
-const $=s=>document.querySelector(s);
-const toast=$('#toast');let tt;
-function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('show'),1800)}
-async function copy(t){
-  try{await navigator.clipboard.writeText(t)}
-  catch{const a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()}
-  say('已复制：'+t)
-}
-document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>copy(b.dataset.copy)));
+(function () {
+  'use strict';
 
-const mb=$('#menuBtn'),pn=$('#panel');
-const menu=o=>{pn.classList.toggle('open',o);mb.setAttribute('aria-expanded',o)};
-mb.addEventListener('click',e=>{e.stopPropagation();menu(!pn.classList.contains('open'))});
-document.addEventListener('click',e=>{if(!pn.contains(e.target))menu(false)});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu(false);mb.focus()}});
-$('#copyBtn').addEventListener('click',()=>{copy(location.href);menu(false)});
+  /* ---------------- 菜单 ---------------- */
+  var menuBtn = document.getElementById('menuBtn');
+  var panel = document.getElementById('menuPanel');
 
-const cv=$('#snow'),g=cv.getContext('2d'),sb=$('#snowBtn');
-const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-let on,fl=[],raf,W,H;
-try{on=localStorage.getItem('snow')}catch{}
-on=on==null?!reduce:on==='1';
-function fit(){
-  const d=Math.min(devicePixelRatio||1,2);
-  W=innerWidth;H=innerHeight;cv.width=W*d;cv.height=H*d;g.setTransform(d,0,0,d,0,0);
-  const n=Math.round(Math.min(90,Math.max(30,W/14)));
-  if(fl.length!==n)fl=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2+1,v:Math.random()+.5,p:Math.random()*6.28}));
-}
-function tick(){
-  g.clearRect(0,0,W,H);g.fillStyle='#fff';
-  for(const f of fl){
-    f.p+=.01;f.y+=f.v;f.x+=Math.sin(f.p)*.5+.15;
-    if(f.y>H+4){f.y=-4;f.x=Math.random()*W}
-    if(f.x>W+4)f.x=-4;
-    g.globalAlpha=.3+f.r*.18;g.beginPath();g.arc(f.x,f.y,f.r,0,6.283);g.fill();
+  function closeMenu() {
+    menuBtn.setAttribute('aria-expanded', 'false');
+    panel.classList.remove('open');
   }
-  raf=requestAnimationFrame(tick);
-}
-function snow(o){
-  on=o;sb.setAttribute('aria-pressed',o);cancelAnimationFrame(raf);g.clearRect(0,0,W,H);
-  if(o)tick();
-  try{localStorage.setItem('snow',o?1:0)}catch{}
-}
-fit();snow(on);
-sb.addEventListener('click',()=>snow(!on));
-addEventListener('resize',fit);
-
-const SPLASH='always';
-const sp=$('#splash'),gated=document.querySelectorAll('.page,.menu-btn');
-function enter(){document.body.classList.remove('locked');document.body.classList.add('ready');gated.forEach(e=>e.inert=false)}
-let seen;try{seen=sessionStorage.getItem('seen')}catch{}
-if(SPLASH==='off'||(SPLASH==='session'&&seen)){sp.remove();enter()}
-else{
-  document.body.classList.add('locked');gated.forEach(e=>e.inert=true);
-  sp.addEventListener('click',()=>{
-    sp.classList.add('out');
-    try{sessionStorage.setItem('seen','1')}catch{}
-    enter();setTimeout(()=>sp.remove(),500);
+  menuBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var open = menuBtn.getAttribute('aria-expanded') === 'true';
+    menuBtn.setAttribute('aria-expanded', String(!open));
+    panel.classList.toggle('open', !open);
   });
-}
+  document.addEventListener('click', function (e) {
+    if (!panel.classList.contains('open')) return;
+    if (panel.contains(e.target) || menuBtn.contains(e.target)) return;
+    closeMenu();
+  });
+
+  /* ---------------- 赞助弹窗 ---------------- */
+  var modal = document.getElementById('sponsorModal');
+
+  function openModal() {
+    modal.classList.add('show');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('no-scroll');
+  }
+  function closeModal() {
+    modal.classList.remove('show');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('no-scroll');
+  }
+
+  /* 点击空白（遮罩）或关闭按钮取消 */
+  modal.addEventListener('click', function (e) {
+    if (e.target.closest('[data-close]')) closeModal();
+  });
+  /* ESC 也能关 */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.classList.contains('show')) closeModal();
+  });
+
+  /* 每次进入页面自动弹一次 */
+  var autoShown = false;
+  function autoOpen() {
+    if (autoShown) return;
+    autoShown = true;
+    openModal();
+  }
+  if (document.readyState === 'complete') {
+    setTimeout(autoOpen, 500);
+  } else {
+    window.addEventListener('load', function () { setTimeout(autoOpen, 500); });
+  }
+
+  /* 手动再次打开（菜单 / 金色按钮） */
+  ['sponsorLink', 'featuredSponsor'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      closeMenu();
+      openModal();
+    });
+  });
+
+  /* 图片加载失败提示 */
+  var img = document.getElementById('sponsorImg');
+  img.addEventListener('error', function () {
+    img.style.display = 'none';
+    var fb = img.parentNode.querySelector('.qr-fallback');
+    if (fb) fb.style.display = 'block';
+  });
+
+  /* ---------------- 雪花 ---------------- */
+  var canvas = document.getElementById('snow');
+  var ctx = canvas.getContext('2d');
+  var W = 0, H = 0, flakes = [], rafId = null;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function resize() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    initFlakes();
+  }
+
+  function initFlakes() {
+    var n = Math.max(30, Math.min(140, Math.round(W * H / 15000)));
+    flakes = [];
+    for (var i = 0; i < n; i++) {
+      flakes.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.7 + 0.6,
+        s: Math.random() * 0.55 + 0.25,
+        d: Math.random() * 0.6 - 0.3,
+        a: Math.random() * 0.5 + 0.25
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < flakes.length; i++) {
+      var f = flakes[i];
+      f.y += f.s;
+      f.x += f.d;
+      if (f.y > H + 4) { f.y = -4; f.x = Math.random() * W; }
+      if (f.x < -4) f.x = W + 4;
+      if (f.x > W + 4) f.x = -4;
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,' + f.a + ')';
+      ctx.fill();
+    }
+    rafId = requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    } else if (!rafId) {
+      draw();
+    }
+  });
+
+  resize();
+  if (!reduceMotion) {
+    draw();
+  } else {
+    /* 减少动态效果时画一次静态雪花 */
+    for (var i = 0; i < flakes.length; i++) {
+      var f = flakes[i];
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,' + f.a + ')';
+      ctx.fill();
+    }
+  }
+})();
 </script>
 </body>
 </html>
